@@ -104,7 +104,31 @@ let asics_income () =
 
   P.close g
 
-let () = asics_income ()
+let asics_course () =
+  let g = P.init ?offline:(offline 1) ~xsize:800. ~ysize:600. (device 1) in
+  P.box g;
+  P.box g ~y:[P.tics ~grid:true ()];
+  P.xlabel g "count of asics";
+  P.ylabel g "bitcoin rate, $";
+
+  let course x =
+    let network_hashrate = network_hashrate +. (50000000000. *. x) in
+    let difficulty = difficulty_for_hashrate network_hashrate in
+    course difficulty 50000000000. 100. 3. in
+
+  let amortizated_course x =
+    let network_hashrate = network_hashrate +. (50000000000. *. x) in
+    let difficulty = difficulty_for_hashrate network_hashrate in
+    amortizated_course 1299. difficulty 50000000000. 0. 3. in
+
+  P.color g green;
+  P.fx g course 0. 100000.;
+  P.color g red;
+  P.fx g amortizated_course 0. 100000.;
+
+  P.close g
+
+let () = asics_course ()
 
 (*let () =
   let g = P.init (*?offline:(offline 1) ~xsize:500. ~ysize:300.*) (device 1) in
