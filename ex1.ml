@@ -76,7 +76,7 @@ let blue = 0x0000FF
   P.box g;
   P.xy_file g "/home/komar/mtgox-all-time"*)
 
-let difficulty = 10076292.88341872
+let difficulty = 11187257.46136079
 let network_hashrate = 73650000000000.
 let current_blocks_per_second = 153. /. 24. /. 60. /. 60.
 
@@ -128,39 +128,28 @@ let asics_course () =
 
   P.close g
 
-let () = asics_course ()
 
-(*let () =
+let videocards () =
   let g = P.init (*?offline:(offline 1) ~xsize:500. ~ysize:300.*) (device 1) in
   P.box g;
+  P.box g ~x:[P.tics ~grid:true ()] ~y:[P.tics ~grid:true ()];
   P.xlabel g "watt-hour rate, rur";
   P.ylabel g "bitcoin price, $";
 
-  (* BitForce SC 50 Gh/s *)
-  P.color g green;
-  P.fx g (course difficulty 50000000000. 100.) 0. 5.;
-  P.color g red;
-  P.fx g (amortizated_course 2499. difficulty 50000000000. 100.) 0. 5.;
-
-  (* BitForce SC 50 Gh/s when there will 40 000 of them *)
-  (let network_hashrate = network_hashrate +. (50000000000. *. 40000.) in
-  let difficulty = difficulty_for_hashrate network_hashrate in
-  P.color g green;
-  P.fx g (course difficulty 50000000000. 100.) 0. 5.;
-  P.color g red;
-  P.fx g (amortizated_course 2499. difficulty 50000000000. 100.) 0. 5.);
+  let course = course difficulty in
+  let amortizated_course hw_c = amortizated_course hw_c difficulty in
 
   (* 7990 *)
-  (*P.color g green;
+  P.color g green;
   P.fx g (course 1200000000. 375.) 0. 5.;
   P.color g red;
-  P.fx g (amortizated_course 1200000000. 375. 777.) 0. 5.;
+  P.fx g (amortizated_course 777. 1200000000. 375.) 0. 5.;
 
   (* 7750 *)
   P.color g green;
   P.fx g (course 123000000. 55.) 0. 5.;
   P.color g red;
-  P.fx g (amortizated_course 123000000. 55. 93.) 0. 5.;*)
+  P.fx g (amortizated_course 93. 123000000. 55.) 0. 5.;
 
   (* 7970 *)
   (*P.color g green;
@@ -231,7 +220,9 @@ let () = asics_course ()
   P.fx g (course 123000000. 55.0) 0. 5.;*)
 
   P.close g
-*)
+
+(*let () = asics_course ()*)
+let () = videocards ()
 
 (*let () =
   let g = P.init ?offline:(offline 1) ~xsize:500. ~ysize:300. (device 1) in
