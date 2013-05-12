@@ -77,13 +77,13 @@ let blue = 0x0000FF
   P.xy_file g "/home/komar/mtgox-all-time"*)
 
 let difficulty = 11187257.46136079
-let network_hashrate = 73650000000000.
+let network_hashrate = 80.42 *. 1000000000000.
 let current_blocks_per_second = 153. /. 24. /. 60. /. 60.
 
 let asics_income () =
   let g = P.init ?offline:(offline 1) ~xsize:800. ~ysize:600. (device 1) in
   P.box g;
-  P.box g ~y:[P.tics ~grid:true ()];
+  P.box g ~x:[P.tics ~grid:true ()] ~y:[P.tics ~grid:true ()];
   P.xlabel g "count of asics";
   P.ylabel g "income per day, $";
 
@@ -95,7 +95,7 @@ let asics_income () =
   let amortizated_income_per_day x =
     let network_hashrate = network_hashrate +. (50000000000. *. x) in
     let difficulty = difficulty_for_hashrate network_hashrate in
-    amortizated_income_per_day 1299. difficulty 50000000000. 0. 3. in
+    amortizated_income_per_day 2499. difficulty 50000000000. 0. 3. in
 
   P.color g green;
   P.fx g income_per_day 10000. 100000.;
@@ -107,7 +107,7 @@ let asics_income () =
 let asics_course () =
   let g = P.init ?offline:(offline 1) ~xsize:800. ~ysize:600. (device 1) in
   P.box g;
-  P.box g ~y:[P.tics ~grid:true ()];
+  P.box g ~x:[P.tics ~grid:true ()] ~y:[P.tics ~grid:true ()];
   P.xlabel g "count of asics";
   P.ylabel g "bitcoin rate, $";
 
@@ -221,8 +221,9 @@ let videocards () =
 
   P.close g
 
-(*let () = asics_course ()*)
-let () = videocards ()
+(*let () = asics_income ()*)
+let () = asics_course ()
+(*let () = videocards ()*)
 
 (*let () =
   let g = P.init ?offline:(offline 1) ~xsize:500. ~ysize:300. (device 1) in
