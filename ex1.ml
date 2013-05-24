@@ -128,6 +128,28 @@ let asics_course () =
 
   P.close g
 
+let litecoin_videocards () =
+  let g = P.init (*?offline:(offline 1) ~xsize:500. ~ysize:300.*) (device 1) in
+  P.box g;
+  P.box g ~x:[P.tics ~grid:true ()] ~y:[P.tics ~grid:true ()];
+  P.xlabel g "watt-hour rate, rur";
+  P.ylabel g "litecoin price, $";
+
+  let difficulty = 558.12178821 in
+  let course = course difficulty in
+  let amortizated_course hw_c = amortizated_course hw_c difficulty in
+
+  (* 7990 *)
+  P.color g green;
+  P.fx g (course 631000. 375.) 0. 5.;
+  P.color g red;
+  P.fx g (amortizated_course 777. 631000. 375.) 0. 5.;
+
+  (* 7970 *)
+  P.color g green;
+  P.fx g (course 750000. 55.) 0. 5.;
+  P.color g red;
+  P.fx g (amortizated_course 391. 750000. 250.) 0. 5.
 
 let videocards () =
   let g = P.init (*?offline:(offline 1) ~xsize:500. ~ysize:300.*) (device 1) in
@@ -222,8 +244,9 @@ let videocards () =
   P.close g
 
 (*let () = asics_income ()*)
-let () = asics_course ()
+(*let () = asics_course ()*)
 (*let () = videocards ()*)
+let () = litecoin_videocards ()
 
 (*let () =
   let g = P.init ?offline:(offline 1) ~xsize:500. ~ysize:300. (device 1) in
