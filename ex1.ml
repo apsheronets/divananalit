@@ -105,7 +105,7 @@ let asics_course () =
 
   P.close g
 
-let litecoin_videocards () =
+let litecoin_course () =
   let g = P.init (*?offline:(offline 1) ~xsize:500. ~ysize:300.*) (device 1) in
   P.box g;
   P.box g ~x:[P.tics ~grid:true ()] ~y:[P.tics ~grid:true ()];
@@ -124,9 +124,17 @@ let litecoin_videocards () =
 
   (* 7970 *)
   P.color g green;
-  P.fx g (course 750000. 55.) 0. 5.;
+  P.fx g (course 750000. 250.) 0. 5.;
   P.color g red;
-  P.fx g (amortizated_course 391. 750000. 250.) 0. 5.
+  P.fx g (amortizated_course 391. 750000. 250.) 0. 5.;
+
+  (* my T400 :) *)
+  (*P.color g green;
+  P.fx g (course 10420. 30.) 0. 5.;
+  P.color g red;
+  P.fx g (amortizated_course 230. 10420. 30.) 0. 5.*)
+
+  P.close g
 
 let videocards () =
   let g = P.init (*?offline:(offline 1) ~xsize:500. ~ysize:300.*) (device 1) in
@@ -181,6 +189,6 @@ let lite_and_bit_comparison () =
 (*let () = asics_income ()*)
 (*let () = asics_course ()*)
 (*let () = videocards ()*)
-let () = lite_and_bit_comparison ()
-(*let () = litecoin_videocards ()*)
+(*let () = lite_and_bit_comparison ()*)
+let () = litecoin_course ()
 
