@@ -1,5 +1,5 @@
 PACKAGES = gnuplot
-FILES = parse_args.ml ex1.ml
+FILES = parse_args.ml common.ml ex1.ml
 
 NAME = divananalit
 CAMLC   = ocamlfind ocamlc   $(LIB)
