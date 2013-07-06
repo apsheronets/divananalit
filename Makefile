@@ -13,7 +13,7 @@ PP =
 OBJS    = $(FILES:.ml=.cmo)
 OPTOBJS = $(FILES:.ml=.cmx)
 
-all: divananalit bitcoin_self_cost litecoin_self_cost bitcoin_profitability
+all: divananalit bitcoin_self_cost litecoin_self_cost bitcoin_profitability litecoin_profitability
 
 divananalit: $(OPTOBJS) ex1.ml
 	$(CAMLOPT) $(OPTOBJS) ex1.ml -linkpkg -o $(NAME)
@@ -26,6 +26,9 @@ litecoin_self_cost: $(OPTOBJS) litecoin_self_cost.ml
 
 bitcoin_profitability: $(OPTOBJS) bitcoin_profitability.ml
 	$(CAMLOPT) $(OPTOBJS) bitcoin_profitability.ml -linkpkg -o $@
+
+litecoin_profitability: $(OPTOBJS) litecoin_profitability.ml
+	$(CAMLOPT) $(OPTOBJS) litecoin_profitability.ml -linkpkg -o $@
 
 .SUFFIXES:
 .SUFFIXES: .ml .mli .cmo .cmi .cmx
@@ -40,7 +43,7 @@ bitcoin_profitability: $(OPTOBJS) bitcoin_profitability.ml
 	$(CAMLOPT) $(PP) -c $<
 
 clean:
-	-rm -f *.cm[ioxa] *.cmx[as] *.o *.a *~ $(NAME) bitcoin_self_cost litecoin_self_cost bitcoin_profitability
+	-rm -f *.cm[ioxa] *.cmx[as] *.o *.a *~ $(NAME) bitcoin_self_cost litecoin_self_cost bitcoin_profitability  litecoin_profitability
 	-rm -f .depend
 
 depend: .depend
