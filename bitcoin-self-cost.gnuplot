@@ -6,7 +6,8 @@ set ylabel "$" #font "Helvetica,18"
 set xdata time
 set timefmt "%Y%m%d"
 
-set xrange ["20110101":"20130706"]
+set format x "%d.%m.%y" # or whatever
+set xrange ["20110401":]
 #set yrange [0:10]
 
 #set logscale y
