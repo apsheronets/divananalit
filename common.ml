@@ -40,6 +40,13 @@ let difficulty_for_hashrate hashrate =
   let time = 600. in (* ten minutes *)
   (hashrate *. time) /. (2. ** 32.)
 
+let reward_for_bitcoin_block block_number =
+  if block_number < 210000 then 50.
+  else if block_number < 420000 then 25.
+  else if block_number < 630000 then 12.5
+  else if block_number < 840000 then 6.25
+  else 0.
+
 let red = 0xFF0000
 let green = 0x00AA00
 let blue = 0x0000FF
