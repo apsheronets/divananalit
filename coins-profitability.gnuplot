@@ -16,4 +16,4 @@ set y2tics
 
 plot \
   'data/litecoin-profitability.dat' using 1:3 with lines linetype 1 title "7970 litecoin income per day", \
-  'data/bitcoin-profitability.dat' using 1:3 with lines linetype 3 title "7970 bitcoin income per day"
+  'data/bitcoin-profitability.dat' using 1:4 with lines linetype 3 title "7970 bitcoin income per day"

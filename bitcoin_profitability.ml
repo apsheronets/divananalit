@@ -35,9 +35,10 @@ let compile l =
   let reward = reward_for_bitcoin_block block_number in
   let power_rate = 4. in
   let income_per_day hashrate power = income_per_day market_rate reward difficulty hashrate power power_rate in
-  let video7970_income = income_per_day 650000000. 250. in
-  let avalon2_income = income_per_day 60000000000. 620. in
-  sprintf "%s %f %f %f" date difficulty video7970_income avalon2_income
+  let core_i7_950_income = income_per_day 18900000. 150. in
+  let video7970_income   = income_per_day 650000000. 250. in
+  let avalon2_income     = income_per_day 60000000000. 620. in
+  sprintf "%s %f %f %f %f" date difficulty core_i7_950_income video7970_income avalon2_income
 
 let compiled_lines =
   Stream.from
