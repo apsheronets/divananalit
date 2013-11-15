@@ -7,8 +7,9 @@ set xdata time
 set timefmt "%Y%m%d"
 
 set format x "%d.%m.%y" # or whatever
-set xrange ["20110401":]
-#set yrange [0:10]
+#set xrange ["20110401":]
+set xrange ["20130101":]
+set yrange [0:300]
 
 #set logscale y
 
