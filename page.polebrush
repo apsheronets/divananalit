@@ -6,7 +6,7 @@ h2. Bitcoin mining cost (self-cost)
 
 h3. from the beginning of time to 2013.02
 
-!graphs/bitcoin-mining-cost-to-20130201.png(FIXME)!
+!graphs/bitcoin-mining-cost-to-20130201.png(bitcoin mining cost to 2013.02)!
 
 Mining cost *is not depending* on bitcoin price but only on:
 
@@ -18,7 +18,7 @@ Mtgox price presented there just to show you a funny dependence: bitcoin price u
 
 h3. the ASICs era: from 2013.02 to now
 
-!graphs/bitcoin-mining-cost-from-20130201-to-now.png(FIXME)!
+!graphs/bitcoin-mining-cost-from-20130201-to-now.png(bitcoin mining cost from 2013.02)!
 
 Since September 2013 GPU mining is not profitable anymore. :(
 
@@ -44,7 +44,7 @@ And this is the right bottom corner or the graph above. You can see that ASIC’
 
 h2. What's more profitable for GPU: mining litecoins or bitcoins?
 
-!graphs/bitcoin-and-litecoin-profitability.png(FIXME)!
+!graphs/bitcoin-and-litecoin-profitability.png(litecoin and bitcoin mining cost for GPU)!
 
 h2. Computation parameters
 
