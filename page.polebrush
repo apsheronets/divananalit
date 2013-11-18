@@ -1,0 +1,71 @@
+h1. Some interesting bitcoin and litecoin graphs
+
+toc.
+
+h2. Bitcoin mining cost (self-cost)
+
+h3. from the beginning of time to 2013.02
+
+!graphs/bitcoin-mining-cost-to-20130201.png(FIXME)!
+
+Mining cost *is not depending* on bitcoin price but only on:
+
+* how much is revard (50 or 25... — you can see the difference at December 2012),
+* how much is the energy cost ($0.12 per KWh here),
+* and what's is current difficulty.
+
+Mtgox price presented there just to show you a funny dependence: bitcoin price usually doesn't come lower than mining cost.
+
+h3. the ASICs era: from 2013.02 to now
+
+!graphs/bitcoin-mining-cost-from-20130201-to-now.png(FIXME)!
+
+Since September 2013 GPU mining is not profitable anymore. :(
+
+h2. Litecoin mining cost (self-cost)
+
+!graphs/litecoin-mining-cost.png(litecoin mining cost)!
+
+h2. Bitcoin mining profitability
+
+h3. from the beginning of time to 2013.02
+
+!graphs/bitcoin-profitability-to-20130201.png(bitcoin mining profitability to 2013.02)!
+
+h3. the ASICs era: from 2013.02 to now
+
+In april 2013 you could earn above $400 per day if you had one of that box. But few months ago you couldn't even make a $50 per day.
+
+!graphs/bitcoin-profitability-from-20130201-to-now.png(bitcoin mining profitability from 2013.02.01 to now)!
+
+And this is the right bottom corner or the graph above. You can see that ASIC’s profitability is falling even when bitcoin price is rising.
+
+!graphs/bitcoin-profitability-from-20130801-to-now.png(bitcoin mining profitability from 2013.08.01 to now)!
+
+h2. What's more profitable for GPU: mining litecoins or bitcoins?
+
+!graphs/bitcoin-and-litecoin-profitability.png(FIXME)!
+
+h2. Computation parameters
+
+* Power rate: 0.12$ per KWh
+* Mining hardware:
+** Avalon ASIC #2
+*** hashrate: 82000000000 hashes per second
+*** power: 700 watts
+*** price: $1499
+** ATI 7970:
+*** hashrate:
+**** for bitcoins: 685000000 hashes per second
+**** for litecoins: 650000 hashes per second
+*** power: 250 watts
+*** price: $399
+** Pentium Dual-Core E5400:
+*** hashrate: 2270000 hashes per second
+*** power: 65 watts
+
+h2. Questions? Suggestions?
+
+"pizdobol@divananlit.org":mailto:pizdobol@divananlit.org
+
+

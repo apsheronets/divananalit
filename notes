@@ -1,0 +1,3 @@
+make grapher && ./grapher -profitability -hashrate 82000000000 -power 620 -blocks-data data/bitcoin-blocks.dat -mtgox-data data/mtgox-btc-usd.dat -energy-cost 0.12
+make grapher && ./grapher -self-cost -hashrate 82000000000 -power 620 -blocks-data data/bitcoin-blocks.dat -energy-cost 0.12
+make grapher && ./grapher -amortized-self-cost 31536000. -hashrate 82000000000 -power 620 -blocks-data data/bitcoin-blocks.dat -energy-cost 0.12 -hardware-cost 1499

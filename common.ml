@@ -1,22 +1,20 @@
 
 let time_for_reward difficulty hashrate = difficulty *. (2. ** 32.) /. hashrate
-let to_usd x = x /. 30.
 let energy_for_reward difficulty hashrate power = (time_for_reward difficulty hashrate) *. power
 let energy_per_coin reward difficulty hashrate power = (energy_for_reward difficulty hashrate power) /. reward
 
 let course reward difficulty hashrate power power_rate =
-  (energy_per_coin reward difficulty hashrate power) *. (to_usd (power_rate /. 3600000.))
+  (energy_per_coin reward difficulty hashrate power) *. (power_rate /. 3600000.)
 
 let proofit_per_second reward difficulty hashrate power power_rate =
   (reward *. course reward difficulty hashrate power power_rate) /.
   (time_for_reward difficulty hashrate)
 
-let amortization_per_second hardware_cost =
-  let years = 1. in
-  hardware_cost /. (years *. 365. *. 24. *. 60. *. 60.)
+let amortization_per_second time hardware_cost =
+  hardware_cost /. time
 
-let amortizated_course hardware_cost reward difficulty hashrate power power_rate =
-  ((proofit_per_second reward difficulty hashrate power power_rate +. amortization_per_second hardware_cost) *. (time_for_reward difficulty hashrate)) /. reward
+let amortizated_course time hardware_cost reward difficulty hashrate power power_rate =
+  ((proofit_per_second reward difficulty hashrate power power_rate +. amortization_per_second time hardware_cost) *. (time_for_reward difficulty hashrate)) /. reward
 
 let coins_income reward difficulty hashrate =
   reward /.
@@ -34,14 +32,14 @@ let income market_rate reward difficulty hashrate power power_rate =
 let income_per_day market_rate reward difficulty hashrate power power_rate =
   (income market_rate reward difficulty hashrate power power_rate) *. 60. *. 60. *. 24.
 
-let amortizated_income hardware_cost market_rate reward difficulty hashrate power power_rate =
-  let course = amortizated_course hardware_cost reward difficulty hashrate power power_rate in
+let amortizated_income time hardware_cost market_rate reward difficulty hashrate power power_rate =
+  let course = amortizated_course time hardware_cost reward difficulty hashrate power power_rate in
   let course = market_rate -. course in
   (reward *. course) /.
   (time_for_reward difficulty hashrate)
 
-let amortizated_income_per_day hardware_cost makret_rate reward difficulty hashrate power power_rate =
-  (amortizated_income hardware_cost makret_rate reward difficulty hashrate power power_rate) *. 60. *. 60. *. 24.
+let amortizated_income_per_day time hardware_cost makret_rate reward difficulty hashrate power power_rate =
+  (amortizated_income time hardware_cost makret_rate reward difficulty hashrate power power_rate) *. 60. *. 60. *. 24.
 
 let difficulty_for_hashrate hashrate =
   let time = 600. in (* ten minutes *)
