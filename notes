@@ -1,3 +1,6 @@
 make grapher && ./grapher -profitability -hashrate 82000000000 -power 620 -blocks-data data/bitcoin-blocks.dat -mtgox-data data/mtgox-btc-usd.dat -energy-cost 0.12
 make grapher && ./grapher -self-cost -hashrate 82000000000 -power 620 -blocks-data data/bitcoin-blocks.dat -energy-cost 0.12
 make grapher && ./grapher -amortized-self-cost 31536000. -hashrate 82000000000 -power 620 -blocks-data data/bitcoin-blocks.dat -energy-cost 0.12 -hardware-cost 1499
+
+unison /home/komar/devel/divananalit.org ssh://gulfik//home/komar/divananalit
+TMP=/tmp/shit.html; OUT=/home/komar/devel/divananalit.org/index.html; echo '<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"/><style>' > $TMP; cat /home/komar/devel/divananalit/style.css >> $TMP; echo '</style></head><body>' >> $TMP; /home/komar/devel/polebrush/polebrush < /home/komar/devel/divananalit/page.polebrush >> $TMP; cat footer.html >> $TMP; xml_pp < $TMP > $OUT
