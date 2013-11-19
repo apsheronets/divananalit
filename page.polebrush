@@ -64,6 +64,10 @@ h2. Computation parameters
 *** hashrate: 2270000 hashes per second
 *** power: 65 watts
 
+h2. Source code
+
+bc. git clone http://divananalit.org/git/divananalit
+
 h2. Questions? Suggestions?
 
 "pizdobol@divananlit.org":mailto:pizdobol@divananlit.org
