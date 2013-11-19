@@ -21,13 +21,13 @@ let fill_blocks_hash hash from_file =
     )
     (lines from_file)
 
-let profitability ?(bitcoins = true) mtgox_market_rates_file blocks_file energy_cost hashrate power =
+let profitability coins_type market_rates_file blocks_file energy_cost hashrate power =
 
   let blocks_hash = Hashtbl.create 2000 in
   fill_blocks_hash blocks_hash blocks_file;
 
-  let mtgox_market_rates =
-    let lines = lines mtgox_market_rates_file in
+  let market_rates =
+    let lines = lines market_rates_file in
     Stream.from
       (fun _ ->
         try
@@ -37,31 +37,31 @@ let profitability ?(bitcoins = true) mtgox_market_rates_file blocks_file energy_
           let market_rate = float_of_string (List.nth l 4) in
           Some (date, market_rate)
         with
-           Stream.Failure -> None) in
+        | Stream.Failure -> None
+        | _ -> failwith "this is a bullshit not a market rate data") in
 
   let reward_for_block =
-    if bitcoins
-    then reward_for_bitcoin_block
-    else fun _ -> 50. in
+    match coins_type with
+    | Bitcoin -> reward_for_bitcoin_block
+    | Litecoin -> reward_for_litecoin_block in
 
   let compile_line date market_rate =
     let block_number, difficulty = Hashtbl.find blocks_hash date in
     let reward = reward_for_block block_number in
-    let income_per_day hashrate power = income_per_day market_rate reward difficulty hashrate power energy_cost in
-    let income = income_per_day hashrate power in
-    sprintf "%s %f" date income in
+    let income_per_day = income_per_day market_rate reward difficulty hashrate power energy_cost in
+    sprintf "%s %f" date income_per_day in
 
   let compiled_lines =
     Stream.from
       (fun _ ->
         try
-          let date, market_rate = Stream.next mtgox_market_rates in
+          let date, market_rate = Stream.next market_rates in
           Some (compile_line date market_rate)
         with Stream.Failure -> None) in
 
   compiled_lines
 
-let self_cost f ?(bitcoins = true) blocks_file energy_cost hashrate power =
+let self_cost f coins_type blocks_file energy_cost hashrate power =
 
   let blocks =
     let lines = lines blocks_file in
@@ -78,9 +78,9 @@ let self_cost f ?(bitcoins = true) blocks_file energy_cost hashrate power =
           Stream.Failure -> None) in
 
   let reward_for_block =
-    if bitcoins
-    then reward_for_bitcoin_block
-    else fun _ -> 50. in
+    match coins_type with
+    | Bitcoin -> reward_for_bitcoin_block
+    | Litecoin -> reward_for_litecoin_block in
 
   let compile date block_number difficulty =
     let reward = reward_for_block block_number in
@@ -115,11 +115,13 @@ let () =
   let hashrate      = ref None in
   let power = ref 0. in
   let block_data = ref "" in
-  let mtgox_data = ref "" in
-  let btce_data  = ref "" in
-  let bitcoins = ref true in
+  let market_rate_data = ref "" in
+  let coins_type = ref None in
 
   let l = [
+    "-coins-type",
+      Arg.String (fun s -> coins_type := match s with "bitcoins" -> Some Bitcoin | "litecoins" -> Some Litecoin | _ -> assert false),
+      "";
     "-self-cost",
       Arg.Unit (fun () -> graph_type := Some SelfCost),
       "";
@@ -144,14 +146,8 @@ let () =
     "-blocks-data",
       Arg.Set_string block_data,
       "";
-    "-mtgox-data",
-      Arg.Set_string mtgox_data,
-      "";
-    "-btce-data",
-      Arg.Set_string btce_data,
-      "";
-    "-litecoins",
-      Arg.Clear bitcoins,
+    "-market-rate-data",
+      Arg.Set_string market_rate_data,
       "";
   ] in
   Arg.parse l (fun _ -> raise (Arg.Bad help)) help;
@@ -160,12 +156,13 @@ let () =
     match !graph_type with
     | None -> assert false
     | Some Profitability ->
-        let mtgox_data =
-          match !mtgox_data with
-          | "" ->
-              (match !btce_data with
-              | "" -> assert false
-              | x -> bitcoins := false; x)
+        let coins_type =
+          match !coins_type with
+          | None -> assert false
+          | Some x -> x in
+        let market_rate_data =
+          match !market_rate_data with
+          | "" -> assert false
           | x -> x in
         let block_data =
           match !block_data with
@@ -180,8 +177,12 @@ let () =
           | Some x -> x
           | None -> assert false in
         let power = !power in
-        profitability ~bitcoins:!bitcoins mtgox_data block_data energy_cost hashrate power
+        profitability coins_type market_rate_data block_data energy_cost hashrate power
     | Some SelfCost ->
+        let coins_type =
+          match !coins_type with
+          | None -> assert false
+          | Some x -> x in
         let block_data =
           match !block_data with
           | "" -> assert false
@@ -195,9 +196,12 @@ let () =
           | Some x -> x
           | None -> assert false in
         let power = !power in
-        self_cost ~bitcoins:!bitcoins block_data energy_cost hashrate power
+        self_cost coins_type block_data energy_cost hashrate power
     | Some (AmortizedSelfCost time) ->
-        let hardware_cost =
+        let coins_type =
+          match !coins_type with
+          | None -> assert false
+          | Some x -> x in        let hardware_cost =
           match !hardware_cost with
           | None -> assert false
           | Some x -> x in
@@ -214,7 +218,7 @@ let () =
           | Some x -> x
           | None -> assert false in
         let power = !power in
-        amortized_self_cost ~bitcoins:!bitcoins time hardware_cost block_data energy_cost hashrate power in
+        amortized_self_cost time hardware_cost coins_type block_data energy_cost hashrate power in
 
   Stream.iter (print_endline) compiled_lines
 
