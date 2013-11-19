@@ -1,7 +1,7 @@
 #!/bin/bash
-#./get-bitcoin-blocks.bash || exit 1
-#./get-litecoin-blocks.bash || exit 1
-#./get-mtgox-btc-usd.bash || exit 1
+./get-bitcoin-blocks.bash || exit 1
+./get-litecoin-blocks.bash || exit 1
+./get-mtgox-btc-usd.bash || exit 1
 
 rm -f img/*
 
