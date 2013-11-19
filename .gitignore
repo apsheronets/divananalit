@@ -10,3 +10,17 @@
 grapher
 .depend
 img/*
+data/ati_7970_bitcoin_mining_cost.dat
+data/ati_7970_bitcoin_mining_cost_with_1_year_amortization.dat
+data/ati_7970_bitcoin_profitability.dat
+data/ati_7970_litecoin_mining_cost.dat
+data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat
+data/ati_7970_litecoin_profitability.dat
+data/avalion_asic_2_bitcoin_mining_cost.dat
+data/avalion_asic_2_bitcoin_mining_cost_with_1_year_amortization.dat
+data/avalon_asic_2_bitcoin_profitability.dat
+data/bitcoin-blocks.dat
+data/litecoin-blocks.dat
+data/mtgox-btc-usd.dat
+data/pentium_dual-core_e5400_bitcoin_profitability.dat
+data/pentium_dual-core_e5400_mining_cost.dat
