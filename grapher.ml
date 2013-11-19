@@ -23,7 +23,7 @@ let fill_blocks_hash hash from_file =
 
 let profitability coins_type market_rates_file blocks_file energy_cost hashrate power =
 
-  let blocks_hash = Hashtbl.create 2000 in
+  let blocks_hash = Hashtbl.create 50000 in
   fill_blocks_hash blocks_hash blocks_file;
 
   let market_rates =
