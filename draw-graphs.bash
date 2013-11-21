@@ -32,4 +32,4 @@ $basedir/grapher -amortized-self-cost 31536000. -coins-type litecoins -hashrate 
 
 $basedir/draw-graphs.gnuplot || exit 1
 
-unison -batch img/ $dst || exit 1
+unison -batch -silent img/ $dst || exit 1
