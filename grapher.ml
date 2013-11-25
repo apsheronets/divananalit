@@ -13,11 +13,13 @@ let lines file =
 let fill_blocks_hash hash from_file =
   Stream.iter
     (fun l ->
-      let l = String.nsplit l " " in
-      let block_number = int_of_string (List.nth l 0) in
-      let date = List.nth l 1 in
-      let difficulty = float_of_string (List.nth l 4) in
-      Hashtbl.add hash date (block_number, difficulty)
+      try
+        let l = String.nsplit l " " in
+        let block_number = int_of_string (List.nth l 0) in
+        let date = List.nth l 1 in
+        let difficulty = float_of_string (List.nth l 4) in
+        Hashtbl.add hash date (block_number, difficulty)
+      with e -> Printf.eprintf "this is a bullshit not a block data: %s" (Printexc.to_string e)
     )
     (lines from_file)
 
@@ -38,7 +40,7 @@ let profitability coins_type market_rates_file blocks_file energy_cost hashrate 
           Some (date, market_rate)
         with
         | Stream.Failure -> None
-        | _ -> failwith "this is a bullshit not a market rate data") in
+        | e -> failwith (Printf.sprintf "this is a bullshit not a market rate data: %s" (Printexc.to_string e))) in
 
   let reward_for_block =
     match coins_type with
@@ -46,7 +48,11 @@ let profitability coins_type market_rates_file blocks_file energy_cost hashrate 
     | Litecoin -> reward_for_litecoin_block in
 
   let compile_line date market_rate =
-    let block_number, difficulty = Hashtbl.find blocks_hash date in
+    let block_number, difficulty =
+      try
+        Hashtbl.find blocks_hash date
+      with Not_found ->
+        failwith (Printf.sprintf "can't find block for %s" date) in
     let reward = reward_for_block block_number in
     let income_per_day = income_per_day market_rate reward difficulty hashrate power energy_cost in
     sprintf "%s %f" date income_per_day in
@@ -54,10 +60,15 @@ let profitability coins_type market_rates_file blocks_file energy_cost hashrate 
   let compiled_lines =
     Stream.from
       (fun _ ->
-        try
-          let date, market_rate = Stream.next market_rates in
-          Some (compile_line date market_rate)
-        with Stream.Failure -> None) in
+        let rec next () =
+          try
+            let date, market_rate = Stream.next market_rates in
+            Some (compile_line date market_rate)
+          with
+            | Stream.Failure -> None
+            | e ->
+                Printf.eprintf "line compilation failed: %s" (Printexc.to_string e); next () in
+        next ()) in
 
   compiled_lines
 
@@ -90,10 +101,14 @@ let self_cost f coins_type blocks_file energy_cost hashrate power =
   let compiled_lines =
     Stream.from
       (fun _ ->
-        try
-          let date, block_number, difficulty = Stream.next blocks in
-          Some (compile date block_number difficulty)
-        with Stream.Failure -> None) in
+        let rec next () =
+          try
+            let date, block_number, difficulty = Stream.next blocks in
+            Some (compile date block_number difficulty)
+          with
+            | Stream.Failure -> None
+            | e -> Printf.eprintf "line compilation failed: %s" (Printexc.to_string e); next () in
+        next ()) in
 
   compiled_lines
 
