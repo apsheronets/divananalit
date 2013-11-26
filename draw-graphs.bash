@@ -30,6 +30,10 @@ $basedir/grapher -profitability -coins-type litecoins -hashrate 650000 -power 25
 $basedir/grapher -self-cost -coins-type litecoins -hashrate 650000 -power 250 -blocks-data data/litecoin-blocks.dat -energy-cost $energy_cost > data/ati_7970_litecoin_mining_cost.dat || exit 1
 $basedir/grapher -amortized-self-cost 31536000. -coins-type litecoins -hashrate 650000 -power 250  -blocks-data data/litecoin-blocks.dat -energy-cost $energy_cost -hardware-cost 399 > data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat || exit 1
 
+mkdir -p img
 $basedir/draw-graphs.gnuplot || exit 1
+mkdir -p графики
+$basedir/draw-graphs-ru.gnuplot || exit 1
 
 unison -batch -silent img/ $dst || exit 1
+unison -batch -silent графики/ `readlink -f $dst/../графики/` || exit 1
