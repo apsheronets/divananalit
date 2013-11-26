@@ -37,7 +37,7 @@ unset xrange
 unset yrange
 set xrange ["20130201":]
 set yrange [0:500]
-set output 'графики/себестоимость-майнинга-лайткоинов-с-20130210-по-сегодняшний-день.png'
+set output 'графики/себестоимость-майнинга-биткоинов-с-20130210-по-сегодняшний-день.png'
 
 plot \
   'data/mtgox-btc-usd.dat' using 1:5 with lines title 'курс биткоина на MtGox' axes x1y1, \
