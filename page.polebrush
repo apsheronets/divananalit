@@ -46,22 +46,24 @@ h2. What's more profitable for GPU: mining litecoins or bitcoins?
 
 !graphs/bitcoin-and-litecoin-profitability.png(litecoin and bitcoin mining cost for GPU)!
 
+The answer is: litecoins.
+
 h2. Computation parameters
 
 * Power rate: 0.12$ per KWh
 * Mining hardware:
 ** Avalon ASIC #2
-*** hashrate: 82000000000 hashes per second
+*** hashrate: 82 000 000 000 hashes per second
 *** power: 700 watts
 *** price: $1499
 ** ATI 7970:
 *** hashrate:
-**** for bitcoins: 685000000 hashes per second
-**** for litecoins: 650000 hashes per second
+**** for bitcoins: 685 000 000 hashes per second
+**** for litecoins: 650 000 hashes per second
 *** power: 250 watts
 *** price: $399
 ** Pentium Dual-Core E5400:
-*** hashrate: 2270000 hashes per second
+*** hashrate: 2 270 000 hashes per second
 *** power: 65 watts
 
 h2. Source code
