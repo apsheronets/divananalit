@@ -102,7 +102,7 @@ set autoscale x
 set autoscale y
 unset xrange
 unset yrange
-set xrange ["20120701":]
+set xrange ["20130101":]
 #set yrange [0:20]
 set output 'img/litecoin-mining-cost.png'
 
