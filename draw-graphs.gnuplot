@@ -11,6 +11,7 @@ set format x "%d.%m.%y"
 #set logscale y
 set y2tics
 set grid x y
+set key out bottom center
 
 set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
 
