@@ -55,5 +55,6 @@ File.open(ARGV[0], 'w') do |file|
     volume = tds[5].inner_text.gsub(/LTC/, '').gsub(/,/, '').strip
     file.write("#{date} #{low} #{high} #{open} #{close} #{volume}\n")
   end
+  file.close
 end
 
