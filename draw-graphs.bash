@@ -24,7 +24,6 @@ $basedir/grapher -profitability -coins-type bitcoins -hashrate 82000000000 -powe
 $basedir/grapher -profitability -coins-type bitcoins -hashrate 685000000 -power 250 -blocks-data $blocks_data -market-rate-data $mtgox_data -energy-cost $energy_cost > data/ati_7970_bitcoin_profitability.dat || exit 1
 $basedir/grapher -profitability -coins-type bitcoins -hashrate 2270000 -power 65 -blocks-data $blocks_data -market-rate-data $mtgox_data -energy-cost $energy_cost > data/pentium_dual-core_e5400_bitcoin_profitability.dat || exit 1
 
-cp $basedir/data/btc-e-ltc-usd.dat data/
 $basedir/grapher -profitability -coins-type litecoins -hashrate 650000 -power 250 -blocks-data data/litecoin-blocks.dat -market-rate-data data/btc-e-ltc-usd.dat -energy-cost $energy_cost > data/ati_7970_litecoin_profitability.dat || exit 1
 
 $basedir/grapher -self-cost -coins-type litecoins -hashrate 650000 -power 250 -blocks-data data/litecoin-blocks.dat -energy-cost $energy_cost > data/ati_7970_litecoin_mining_cost.dat || exit 1
