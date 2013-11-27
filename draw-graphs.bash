@@ -6,6 +6,7 @@ dst=$1
 $basedir/get-bitcoin-blocks.bash || exit 1
 $basedir/get-litecoin-blocks.bash || exit 1
 $basedir/get-mtgox-btc-usd.bash || exit 1
+source $HOME/.rvm/scripts/rvm
 ruby $basedir/get-btce-ltc-usd.rb data/btc-e-ltc-usd.dat || exit 1
 
 #rm -f $basedir/img/*
