@@ -7,6 +7,7 @@ $basedir/get-bitcoin-blocks.bash || exit 1
 $basedir/get-litecoin-blocks.bash || exit 1
 $basedir/get-mtgox-btc-usd.bash || exit 1
 ruby $basedir/get-btce-ltc-usd.rb > data/btc-e-ltc-usd.dat || exit 1
+[[ `cat data/btc-e-ltc-usd.dat` == "" ]] && exit 1 # FIXME
 
 #rm -f $basedir/img/*
 
