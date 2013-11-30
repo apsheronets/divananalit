@@ -98,6 +98,14 @@ plot \
   'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines title "ATI 7970 income per day from bitcoin mining" axes x1y1, \
   'data/ati_7970_litecoin_profitability.dat' using 1:2 with lines title "ATI 7970 income per day from litecoin mining" axes x1y1
 
+set autoscale x
+set autoscale y
+set xrange ["20130701":]
+set output 'img/ghash-profitability-from-20130701-to-now.png'
+
+plot \
+  'data/ghash_bitcoin_profitability.dat' using 1:2 with lines title "income per day from 1 ghash for bitcoin mining" axes x1y1, \
+  'data/bitcoin-blocks.dat' using 2:6 with lines title "mining difficulty" linetype 7 axes x1y2
 
 set autoscale x
 set autoscale y

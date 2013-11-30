@@ -26,6 +26,8 @@ $basedir/grapher -profitability -coins-type bitcoins -hashrate 2270000 -power 65
 
 $basedir/grapher -profitability -coins-type litecoins -hashrate 650000 -power 250 -blocks-data data/litecoin-blocks.dat -market-rate-data data/btc-e-ltc-usd.dat -energy-cost $energy_cost > data/ati_7970_litecoin_profitability.dat || exit 1
 
+$basedir/grapher -profitability -coins-type bitcoins -hashrate 1000000000 -power 0 -blocks-data $blocks_data -market-rate-data $mtgox_data -energy-cost $energy_cost > data/ghash_bitcoin_profitability.dat || exit 1
+
 $basedir/grapher -self-cost -coins-type litecoins -hashrate 650000 -power 250 -blocks-data data/litecoin-blocks.dat -energy-cost $energy_cost > data/ati_7970_litecoin_mining_cost.dat || exit 1
 $basedir/grapher -amortized-self-cost 31536000. -coins-type litecoins -hashrate 650000 -power 250  -blocks-data data/litecoin-blocks.dat -energy-cost $energy_cost -hardware-cost 399 > data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat || exit 1
 

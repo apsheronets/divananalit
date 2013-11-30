@@ -97,6 +97,14 @@ plot \
   'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines title "доход в день от ATI 7970 при майнинге биткоинов" axes x1y1, \
   'data/ati_7970_litecoin_profitability.dat' using 1:2 with lines title "доход в день от ATI 7970 при майнинге лайткоинов" axes x1y1
 
+set autoscale x
+set autoscale y
+set xrange ["20130701":]
+set output 'графики/доходность-гигахеша-на-майнинге-биткоинов-с-20130701-по-сегодняшний-день.png'
+
+plot \
+  'data/ghash_bitcoin_profitability.dat' using 1:2 with lines title "доход с гигахеша при майнинге биткоинов" axes x1y1, \
+  'data/bitcoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
 
 set autoscale x
 set autoscale y
