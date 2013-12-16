@@ -2,36 +2,36 @@ require 'mechanize'
 require 'digest/sha1'
 
 def smart_www_action(&blk)
-	attempts = 10
-	begin
-		blk.call
-	rescue Mechanize::ResponseCodeError => e
-		if e.response_code == "404"
-			raise e
-		else
-			attempts -= 1
-			if attempts <= 0
-				raise e
-			else
-				retry
-			end
-		end
-	rescue => e
-		attempts -= 1
-		if attempts <= 0
-			raise e
-		else
-			retry
-		end
-	end
+  attempts = 10
+  begin
+    blk.call
+  rescue Mechanize::ResponseCodeError => e
+    if e.response_code == "404"
+      raise e
+    else
+      attempts -= 1
+      if attempts <= 0
+        raise e
+      else
+        retry
+      end
+    end
+  rescue => e
+    attempts -= 1
+    if attempts <= 0
+      raise e
+    else
+      retry
+    end
+  end
 end
 
 def get(www, *args)
   # debug
   #puts "GET in #{caller[0]}: #{args.inspect}"
-	smart_www_action do
-		www.get *args
-	end
+  smart_www_action do
+    www.get *args
+  end
 end
 
 agent = Mechanize.new { |agent|
