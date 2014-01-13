@@ -9,7 +9,7 @@ ruby $basedir/get-btce-ltc-usd.rb  > data/btc-e-ltc-usd.dat || exit 1
 ruby $basedir/get-mtgox-btc-usd.rb > data/mtgox-btc-usd.dat~ || exit 1
 [[ `cat data/btc-e-ltc-usd.dat` == "" ]] && exit 1 # FIXME
 [[ `cat data/mtgox-btc-usd.dat` == "" ]] && exit 1 # FIXME
-cat mtgox-btc-usd.dat >> data/mtgox-btc-usd.dat~
+cat $basedir/mtgox-btc-usd.dat >> data/mtgox-btc-usd.dat~
 uniq -w 8 data/mtgox-btc-usd.dat~ | sort > data/mtgox-btc-usd.dat
 
 #rm -f $basedir/img/*
