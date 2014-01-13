@@ -1,42 +1,40 @@
-PACKAGES = extlib
-FILES = common.ml grapher.ml
 
-NAME = grapher
-CAMLC   = ocamlfind ocamlc   $(LIB)
-CAMLOPT = ocamlfind ocamlopt $(LIB)
-CAMLDOC = ocamlfind ocamldoc $(LIB)
-CAMLDEP = ocamlfind ocamldep
-LIB = -package $(PACKAGES)
-PP =
+# OCaml part
 
-OBJS    = $(FILES:.ml=.cmo)
-OPTOBJS = $(FILES:.ml=.cmx)
+packages = extlib
+files = $(shell ls *.ml)
+name = grapher
 
-all: $(NAME)
+camlc   = ocamlfind ocamlc   $(lib)
+camlopt = ocamlfind ocamlopt $(lib)
+camldep = ocamlfind ocamldep
+lib = -package $(packages)
 
-$(NAME): $(OPTOBJS)
-	$(CAMLOPT) $^ -linkpkg -o $@
+objs    = $(files:.ml=.cmo)
+optobjs = $(files:.ml=.cmx)
 
-.SUFFIXES:
+all: $(name)
+
+$(name): $(optobjs)
+	$(camlopt) `ocamldep-sorter $^ < .depend` -linkpkg -o $@
+
 .SUFFIXES: .ml .mli .cmo .cmi .cmx
 
-.PHONY: doc
-
 .ml.cmo:
-	$(CAMLC) $(PP) -c $<
+	$(camlc) -c $<
 .mli.cmi:
-	$(CAMLC) -c $<
+	$(camlc) -c $<
 .ml.cmx:
-	$(CAMLOPT) $(PP) -c $<
+	$(camlopt) -c $<
+
+
 
 clean:
-	-rm -f *.cm[ioxa] *.cmx[as] *.o *.a *~ $(NAME)
+	-rm -f *.cm[ioxa] *.cmx[as] *.o *.a *~ $(name)
 	-rm -f .depend
 
-depend: .depend
-
-.depend: $(FILES)
-	$(CAMLDEP) $(PP) $(LIB) $(FILES:.ml=.mli) $(FILES) > .depend
+.depend: $(files)
+	$(camldep) $(lib) $(files:.ml=.mli) $(files) > .depend
 
 FORCE:
 

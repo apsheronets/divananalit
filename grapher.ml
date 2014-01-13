@@ -10,7 +10,7 @@ let lines file =
       try Some (input_line chan)
       with End_of_file -> close_in chan; None)
 
-let fill_blocks_hash hash from_file =
+let fill_bitcoin_blocks_hash hash from_file =
   Stream.iter
     (fun l ->
       try
@@ -19,14 +19,31 @@ let fill_blocks_hash hash from_file =
         let date = List.nth l 1 in
         let difficulty = float_of_string (List.nth l 4) in
         Hashtbl.add hash date (block_number, difficulty)
-      with e -> Printf.eprintf "this is a bullshit not a block data: %s" (Printexc.to_string e)
+      with e -> Printf.eprintf "this is a bullshit not a bitcoin block data: %s\n" (Printexc.to_string e)
+    )
+    (lines from_file)
+
+let fill_litecoin_blocks_hash hash from_file =
+  Stream.iter
+    (fun l ->
+      try
+        let l = String.nsplit l " " in
+        let block_number = int_of_string (List.nth l 0) in
+        let date = List.nth l 1 in
+        let difficulty = float_of_string (List.nth l 2) in
+        Hashtbl.add hash date (block_number, difficulty)
+      with e -> Printf.eprintf "this is a bullshit not a litecoin block data: %s\n" (Printexc.to_string e)
     )
     (lines from_file)
 
 let profitability coins_type market_rates_file blocks_file energy_cost hashrate power =
 
   let blocks_hash = Hashtbl.create 50000 in
-  fill_blocks_hash blocks_hash blocks_file;
+
+  let () =
+    match coins_type with
+    | Bitcoin  -> fill_bitcoin_blocks_hash blocks_hash blocks_file
+    | Litecoin -> fill_litecoin_blocks_hash blocks_hash blocks_file in
 
   let market_rates =
     let lines = lines market_rates_file in
@@ -34,13 +51,15 @@ let profitability coins_type market_rates_file blocks_file energy_cost hashrate 
       (fun _ ->
         try
           let line = Stream.next lines in
-          let l = String.nsplit line " " in
-          let date = List.nth l 0 in
-          let market_rate = float_of_string (List.nth l 4) in
-          Some (date, market_rate)
+          (try
+            let l = String.nsplit line " " in
+            let date = List.nth l 0 in
+            let market_rate = float_of_string (List.nth l 4) in
+            Some (date, market_rate)
+          with
+            | e -> failwith (Printf.sprintf "this is a bullshit not a market rate data: %S: %s" line (Printexc.to_string e)))
         with
-        | Stream.Failure -> None
-        | e -> failwith (Printf.sprintf "this is a bullshit not a market rate data: %s" (Printexc.to_string e))) in
+        | Stream.Failure -> None) in
 
   let reward_for_block =
     match coins_type with
@@ -67,7 +86,7 @@ let profitability coins_type market_rates_file blocks_file energy_cost hashrate 
           with
             | Stream.Failure -> None
             | e ->
-                Printf.eprintf "line compilation failed: %s" (Printexc.to_string e); next () in
+                Printf.eprintf "line compilation failed: %s\n" (Printexc.to_string e); next () in
         next ()) in
 
   compiled_lines
@@ -83,7 +102,10 @@ let self_cost f coins_type blocks_file energy_cost hashrate power =
           let l = String.nsplit l " " in
           let block_number = int_of_string (List.nth l 0) in
           let date = List.nth l 1 in
-          let difficulty = float_of_string (List.nth l 4) in
+          let difficulty =
+            match coins_type with
+            | Bitcoin -> float_of_string (List.nth l 4)
+            | Litecoin -> float_of_string (List.nth l 2) in
           Some (date, block_number, difficulty)
         with
           Stream.Failure -> None) in
@@ -107,7 +129,7 @@ let self_cost f coins_type blocks_file energy_cost hashrate power =
             Some (compile date block_number difficulty)
           with
             | Stream.Failure -> None
-            | e -> Printf.eprintf "line compilation failed: %s" (Printexc.to_string e); next () in
+            | e -> Printf.eprintf "line compilation failed: %s\n" (Printexc.to_string e); next () in
         next ()) in
 
   compiled_lines

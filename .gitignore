@@ -10,6 +10,7 @@
 grapher
 .depend
 img/*
+графики/*
 data/ati_7970_bitcoin_mining_cost.dat
 data/ati_7970_bitcoin_mining_cost_with_1_year_amortization.dat
 data/ati_7970_bitcoin_profitability.dat

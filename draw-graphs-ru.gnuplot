@@ -118,7 +118,7 @@ plot \
   'data/btc-e-ltc-usd.dat' using 1:5 with lines title 'курс лайткоина на BTC-E' axes x1y1, \
   'data/ati_7970_litecoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970" axes x1y1, \
   'data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970 с учетом амортизации за год" axes x1y1, \
-  'data/litecoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
+  'data/litecoin-blocks.dat' using 2:3 with lines title "сложность" linetype 7 axes x1y2
 
 set autoscale x
 set autoscale y
