@@ -2,12 +2,6 @@
 
 basedir=`dirname $0`
 
-# This API was broken
-#wget -q http://explorer.litecoin.net/chain/Litecoin/q/nethash -O data/litecoin-blocks || exit 1
-#tail -n +18 data/litecoin-blocks > data/litecoin-blocks-wo-header.csv || exit 1
-#rm -f data/litecoin-blocks.dat
-#ruby $basedir/csv-unixtime-to-dat.rb data/litecoin-blocks-wo-header.csv data/litecoin-blocks.dat || exit 1
-#rm -f data/litecoin-blocks-wo-header.csv
-
+wget -q http://komar.lexs.blasux.ru/litecoin-blocks-difficulty -O data/litecoin-blocks || exit 1
 ruby $basedir/unixtime-to-dat.rb data/litecoin-blocks data/litecoin-blocks.dat || exit 1
 
