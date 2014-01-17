@@ -92,15 +92,18 @@ set autoscale x
 set autoscale y
 set xrange ["20120701":]
 #set yrange [0:500]
+set y2label 'BTC'
 set output 'img/bitcoin-and-litecoin-profitability.png'
 
 plot \
-  'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines title "ATI 7970 income per day from bitcoin mining" axes x1y1, \
-  'data/ati_7970_litecoin_profitability.dat' using 1:2 with lines title "ATI 7970 income per day from litecoin mining" axes x1y1
+  'data/btc-e-ltc-btc.dat' using 1:2 with lines linetype 5 title "BTC-E litecoin/bitcoin rate" axes x1y2, \
+  'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines linetype 1 title "ATI 7970 income per day from bitcoin mining" axes x1y1, \
+  'data/ati_7970_litecoin_profitability.dat' using 1:2 with lines linetype 2 title "ATI 7970 income per day from litecoin mining" axes x1y1
 
 set autoscale x
 set autoscale y
 set xrange ["20130701":]
+set y2label 'mining difficulty'
 set output 'img/ghash-profitability-from-20130701-to-now.png'
 
 plot \
