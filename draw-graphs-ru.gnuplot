@@ -91,15 +91,18 @@ set autoscale x
 set autoscale y
 set xrange ["20120701":]
 #set yrange [0:500]
+set y2label 'BTC'
 set output 'графики/доходность-майнинга-биткоинов-и-лайткоинов.png'
 
 plot \
-  'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines title "доход в день от ATI 7970 при майнинге биткоинов" axes x1y1, \
-  'data/ati_7970_litecoin_profitability.dat' using 1:2 with lines title "доход в день от ATI 7970 при майнинге лайткоинов" axes x1y1
+  'data/btc-e-ltc-btc.dat' using 1:2 with lines linetype 5 title "цена лайткоина в биткоинах на BTC-E" axes x1y2, \
+  'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines linetype 1 title "доход в день от ATI 7970 при майнинге биткоинов" axes x1y1, \
+  'data/ati_7970_litecoin_profitability.dat' using 1:2 with lines linetype 2 title "доход в день от ATI 7970 при майнинге лайткоинов" axes x1y1
 
 set autoscale x
 set autoscale y
 set xrange ["20130701":]
+set y2label 'mining difficulty'
 set output 'графики/доходность-гигахеша-на-майнинге-биткоинов-с-20130701-по-сегодняшний-день.png'
 
 plot \
