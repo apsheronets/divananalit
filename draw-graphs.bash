@@ -7,11 +7,14 @@ $basedir/get-bitcoin-blocks.bash || exit 1
 $basedir/get-litecoin-blocks.bash || exit 1
 ruby $basedir/get-btce-ltc-usd.rb  > data/btc-e-ltc-usd.dat || exit 1
 ruby $basedir/get-btce-ltc-btc.rb  > data/btc-e-ltc-btc.dat || exit 1
+ruby $basedir/get-btce-btc-usd.rb  > data/btc-e-btc-usd.dat || exit 1
 ruby $basedir/get-mtgox-btc-usd.rb > data/mtgox-btc-usd.dat~ || exit 1
 [[ `cat data/btc-e-ltc-usd.dat`  == "" ]] && exit 1 # FIXME
 [[ `cat data/mtgox-btc-usd.dat~` == "" ]] && exit 1 # FIXME
+[[ `cat data/btc-e-btc-usd.dat`  == "" ]] && exit 1 # FIXME
 cat $basedir/mtgox-btc-usd.dat >> data/mtgox-btc-usd.dat~
 uniq -w 8 data/mtgox-btc-usd.dat~ | sort > data/mtgox-btc-usd.dat
+join <(sort -k1,1 data/btc-e-btc-usd.dat) <(sort -k1,1 data/mtgox-btc-usd.dat) > data/mtgox-and-btce.dat
 
 #rm -f $basedir/img/*
 

@@ -130,10 +130,28 @@ plot \
   'data/btc-e-ltc-usd.dat' using 1:3 with lines title 'btc-e litecoin price' axes x1y1 linetype 1, \
   'data/ati_7970_litecoin_mining_cost.dat' using 1:2 with lines title "ATI 7970 litecoin mining cost" axes x1y1 linetype 2, \
   'data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "ATI 7970 litecoin mining cost with 1 year amortization" axes x1y1 linetype 3, \
+  'data/ati_7970_litecoin_mining_cost_with_1_month_amortization.dat' using 1:2 with lines title "ATI 7970 litecoin mining cost with 1 month amortization" axes x1y1 linetype 4, \
   'data/litecoin-blocks.dat' using 2:3 with lines title "litecoin mining difficulty" linetype 7 axes x1y2
 
 set logscale y
 set logscale y2
 set output 'img/litecoin-mining-cost-logscale.png'
 replot
+
+unset logscale y
+unset logscale y2
+
+set autoscale x
+set autoscale y
+unset xrange
+unset yrange
+set xrange ["20130701":]
+#set yrange [0:20]
+set output 'img/mtgox-btce-difference.png'
+
+plot \
+  '< sort -n data/mtgox-and-btce.dat' using 1:($8/$2) with lines axes x1y2 linetype 6 title "relative difference (mtgox / btc-e)", \
+  '< sort -n data/mtgox-and-btce.dat' using 1:($8-$2) with lines axes x1y1 linetype 3 title "absolute difference (mtgox - btc-e)", \
+  'data/mtgox-btc-usd.dat' using 1:2 with lines title 'mtgox price' axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines title 'btc-e bitcoin price' axes x1y1 linetype 2
 
