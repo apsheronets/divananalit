@@ -146,6 +146,7 @@ unset xrange
 unset yrange
 set xrange ["20130701":]
 #set yrange [0:20]
+set y2label 'relative difference'
 set output 'img/mtgox-btce-difference.png'
 
 plot \
