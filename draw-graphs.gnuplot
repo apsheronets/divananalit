@@ -146,12 +146,12 @@ unset xrange
 unset yrange
 set xrange ["20130701":]
 #set yrange [0:20]
-set y2label 'relative difference'
+set y2label '%'
 set output 'img/mtgox-btce-difference.png'
 
 plot \
-  '< sort -n data/mtgox-and-btce.dat' using 1:($8/$2) with lines axes x1y2 linetype 6 title "relative difference (mtgox / btc-e)", \
-  '< sort -n data/mtgox-and-btce.dat' using 1:($8-$2) with lines axes x1y1 linetype 3 title "absolute difference (mtgox - btc-e)", \
+  '< sort -n data/mtgox-and-btce.dat' using 1:((($8/$2)-1)*100) with lines axes x1y2 linetype 6 title "relative difference (mtgox / btc-e) in percents", \
+  '< sort -n data/mtgox-and-btce.dat' using 1:($8-$2) with lines axes x1y1 linetype 3 title "absolute difference (mtgox - btc-e) in USD", \
   'data/mtgox-btc-usd.dat' using 1:2 with lines title 'mtgox price' axes x1y1 linetype 1, \
   'data/btc-e-btc-usd.dat' using 1:2 with lines title 'btc-e bitcoin price' axes x1y1 linetype 2
 
