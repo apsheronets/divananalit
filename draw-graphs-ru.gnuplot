@@ -144,3 +144,21 @@ set terminal pngcairo transparent enhanced font "Helvetica,10" size 600, 400
 set output 'графики/себестоимость-майнинга-биткоинов-логарифмическая-шкала-600x400.png'
 replot
 
+unset logscale y
+unset logscale y2
+
+set autoscale x
+set autoscale y
+unset xrange
+unset yrange
+set xrange ["20130701":]
+#set yrange [0:20]
+set y2label 'relative difference'
+set output 'img/разнциа-между-mtgox-и-btce.png'
+
+plot \
+  '< sort -n data/mtgox-and-btce.dat' using 1:($8/$2) with lines axes x1y2 linetype 6 title "относительная разница (mtgox / btc-e)", \
+  '< sort -n data/mtgox-and-btce.dat' using 1:($8-$2) with lines axes x1y1 linetype 3 title "абсолютная разница (mtgox - btc-e)", \
+  'data/mtgox-btc-usd.dat' using 1:2 with lines title 'цена на MtGox' axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines title 'цена на BTC-E' axes x1y1 linetype 2
+
