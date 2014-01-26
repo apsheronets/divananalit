@@ -154,7 +154,7 @@ unset yrange
 set xrange ["20130701":]
 #set yrange [0:20]
 set y2label 'relative difference'
-set output 'img/разнциа-между-mtgox-и-btce.png'
+set output 'графики/разнциа-между-mtgox-и-btce.png'
 
 plot \
   '< sort -n data/mtgox-and-btce.dat' using 1:($8/$2) with lines axes x1y2 linetype 6 title "относительная разница (mtgox / btc-e)", \
