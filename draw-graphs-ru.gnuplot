@@ -152,9 +152,10 @@ set autoscale x
 set autoscale y
 unset xrange
 unset yrange
-set xrange ["20130701":]
+set xrange ["20130501":]
 #set yrange [0:20]
 set y2label '%'
+set grid x y y2
 set output 'графики/разнциа-между-mtgox-и-btce.png'
 
 plot \
