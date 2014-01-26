@@ -10,10 +10,10 @@ ruby $basedir/get-btce-ltc-btc.rb  > data/btc-e-ltc-btc.dat || (echo "can't get 
 ruby $basedir/get-btce-btc-usd.rb  > data/btc-e-btc-usd.dat || (echo "can't get btce-btc-usd prices"; exit 1)
 ruby $basedir/get-mtgox-btc-usd.rb > data/mtgox-btc-usd.dat~ || (echo "can't get mtgox-btc-usd prices"; exit 1)
 [[ `cat data/btc-e-ltc-usd.dat`  == "" ]] && (echo "btce-ltc-usd prices are empty"; exit 1)
-[[ `cat data/mtgox-btc-usd.dat~` == "" ]] && (echo "mtgox-btc-usd prices are empty"; exit 1)
 [[ `cat data/btc-e-btc-usd.dat`  == "" ]] && (echo "btce-btc-usd prices are empty"; exit 1)
 cat $basedir/mtgox-btc-usd.dat >> data/mtgox-btc-usd.dat~
 uniq -w 8 data/mtgox-btc-usd.dat~ | sort > data/mtgox-btc-usd.dat
+[[ `cat data/mtgox-btc-usd.dat` == "" ]] && (echo "mtgox-btc-usd prices are empty"; exit 1)
 join <(sort -k1,1 data/btc-e-btc-usd.dat) <(sort -k1,1 data/mtgox-btc-usd.dat) > data/mtgox-and-btce.dat
 
 #rm -f $basedir/img/*
