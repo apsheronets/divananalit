@@ -159,8 +159,8 @@ set grid x y y2
 set output 'графики/разнциа-между-mtgox-и-btce.png'
 
 plot \
-  '< sort -n data/mtgox-and-btce.dat' using 1:((($8/$2)-1)*100) with lines axes x1y2 linetype 6 title "относительная разница (mtgox / btc-e) в процентах", \
-  '< sort -n data/mtgox-and-btce.dat' using 1:($8-$2) with lines axes x1y1 linetype 3 title "абсолютная разница (mtgox - btc-e) в долларах", \
+  '< sort -n data/mtgox-and-btce.dat' using 1:((1-($2/$8))*100) with lines axes x1y2 linetype 6 title "относительная разница между MtGox и BTC-E в процентах", \
+  '< sort -n data/mtgox-and-btce.dat' using 1:($8-$2) with lines axes x1y1 linetype 3 title "абсолютная разница между MtGox и BTC-E в долларах", \
   'data/mtgox-btc-usd.dat' using 1:2 with lines title 'цена на MtGox' axes x1y1 linetype 1, \
   'data/btc-e-btc-usd.dat' using 1:2 with lines title 'цена на BTC-E' axes x1y1 linetype 2
 
