@@ -41,7 +41,9 @@ set yrange [0:500]
 set output 'графики/себестоимость-майнинга-биткоинов-с-20130210-по-сегодняшний-день.png'
 
 plot \
-  'data/mtgox-btc-usd.dat' using 1:5 with lines title 'курс биткоина на MtGox' axes x1y1, \
+  'data/btc-e-btc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:3 with lines title 'курс биткоина на BTC-E ' axes x1y1 linetype 1, \
   'data/ati_7970_bitcoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970" axes x1y1, \
   'data/ati_7970_bitcoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970 с учетом амортизации за год" axes x1y1, \
   'data/avalion_asic_2_bitcoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на Avalon ASIC #2" axes x1y1, \
@@ -72,7 +74,9 @@ set yrange [0:500]
 set output 'графики/доходность-майнинга-биткоинов-с-20130201-по-сегодняшний-день.png'
 
 plot \
-  'data/mtgox-btc-usd.dat' using 1:5 with lines title 'курс биткоина на MtGox' axes x1y1, \
+  'data/btc-e-btc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:3 with lines title 'курс биткоина на BTC-E' axes x1y1 linetype 1, \
   'data/avalon_asic_2_bitcoin_profitability.dat' using 1:2 with lines title "доход в день от майнинга на Avalon ASIC #2" linetype 3 axes x1y1, \
   'data/ati_7970_bitcoin_profitability.dat' using 1:2 with lines title "доход в день от майнинга на GPU ATI 7970" linetype 4 axes x1y1, \
   'data/bitcoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
@@ -85,7 +89,9 @@ set yrange [0:200]
 set output 'графики/доходность-майнинга-биткоинов-с-20130801-по-сегодняший-день.png'
 
 plot \
-  'data/mtgox-btc-usd.dat' using 1:5 with lines title 'курс биткоина на MtGox' axes x1y1, \
+  'data/btc-e-btc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:3 with lines title 'курс биткоина на BTC-E' axes x1y1 linetype 1, \
   'data/avalon_asic_2_bitcoin_profitability.dat' using 1:2 with lines title "доход от Avalon ASIC #2 в день" linetype 3 axes x1y1, \
   'data/bitcoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
 
@@ -121,7 +127,9 @@ set xrange ["20130101":]
 set output 'графики/себестоимость-майнинга-лайткоинов.png'
 
 plot \
-  'data/btc-e-ltc-usd.dat' using 1:5 with lines title 'курс лайткоина на BTC-E' axes x1y1, \
+  'data/btc-e-ltc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
+  'data/btc-e-ltc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
+  'data/btc-e-ltc-usd.dat' using 1:3 with lines title 'курс лайткоина на BTC-E' axes x1y1 linetype 1, \
   'data/ati_7970_litecoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970" axes x1y1, \
   'data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970 с учетом амортизации за год" axes x1y1, \
   'data/litecoin-blocks.dat' using 2:3 with lines title "сложность" linetype 7 axes x1y2
