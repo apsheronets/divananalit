@@ -9,7 +9,7 @@ url = 'http://www.cryptocoincharts.info/period-charts.php?period=alltime&resolut
 
 page = agent.get url
 
-trs = page.root.search('div[@class="container"]/div[@class="row"]/div[@class="span10"]/table[@class="table table-striped"]/tbody/tr')
+trs = page.search('div[@class="container"]/div[@class="row"]/div[@class="span10"]/table[@class="table table-striped"]/tbody/tr')
 trs.each do |tr|
   tds = tr.search("td")
   date = tds[0].inner_text.strip.gsub(/-/, '')
