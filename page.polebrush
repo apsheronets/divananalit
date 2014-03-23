@@ -52,8 +52,6 @@ h2. Difference between MtGox and BTC-E bitcoin prices
 
 !graphs/mtgox-btce-difference.png!
 
-(sorry for these terrible saws instead of lines — I use very bad data)
-
 h2. Computation parameters
 
 * Power rate: 0.12$ per KWh
