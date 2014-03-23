@@ -29,6 +29,8 @@ mtgox_data=data/mtgox-btc-usd.dat
 
 $basedir/grapher -self-cost -coins-type bitcoins -hashrate 82000000000 -power 700 -blocks-data $blocks_data -energy-cost $energy_cost > data/avalion_asic_2_bitcoin_mining_cost.dat || exit 1
 $basedir/grapher -amortized-self-cost 31536000. -coins-type bitcoins -hashrate 82000000000 -power 700 -blocks-data $blocks_data -energy-cost $energy_cost -hardware-cost 1499 > data/avalion_asic_2_bitcoin_mining_cost_with_1_year_amortization.dat || exit 1
+$basedir/grapher -self-cost -coins-type bitcoins -hashrate 2000000000000 -power 2200 -blocks-data $blocks_data -energy-cost $energy_cost > data/terraminer_iv_bitcoin_mining_cost.dat || exit 1
+$basedir/grapher -amortized-self-cost 31536000. -coins-type bitcoins -hashrate 2000000000000 -power 2200 -blocks-data $blocks_data -energy-cost $energy_cost -hardware-cost 5999 > data/terraminer_iv_bitcoin_mining_cost_with_1_year_amortization.dat || exit 1
 $basedir/grapher -self-cost -coins-type bitcoins -hashrate 685000000 -power 250 -blocks-data $blocks_data -energy-cost $energy_cost > data/ati_7970_bitcoin_mining_cost.dat || exit 1
 $basedir/grapher -amortized-self-cost 31536000. -coins-type bitcoins -hashrate 685000000 -power 250  -blocks-data $blocks_data -energy-cost $energy_cost -hardware-cost 399 > data/ati_7970_bitcoin_mining_cost_with_1_year_amortization.dat || exit 1
 $basedir/grapher -self-cost -coins-type bitcoins -hashrate 530000000 -power 294 -blocks-data $blocks_data -energy-cost $energy_cost > data/ati_5970_bitcoin_mining_cost.dat || exit 1
@@ -36,6 +38,7 @@ $basedir/grapher -amortized-self-cost 31536000. -coins-type bitcoins -hashrate 5
 $basedir/grapher -self-cost -coins-type bitcoins -hashrate 2270000 -power 65 -blocks-data $blocks_data -energy-cost $energy_cost > data/pentium_dual-core_e5400_mining_cost.dat || exit 1
 
 $basedir/grapher -profitability -coins-type bitcoins -hashrate 82000000000 -power 700 -blocks-data $blocks_data -market-rate-data data/btc-e-btc-usd.dat -energy-cost $energy_cost > data/avalon_asic_2_bitcoin_profitability.dat || exit 1
+$basedir/grapher -profitability -coins-type bitcoins -hashrate 2000000000000 -power 2200 -blocks-data $blocks_data -market-rate-data data/btc-e-btc-usd.dat -energy-cost $energy_cost > data/terraminer_iv_bitcoin_profitability.dat || exit 1
 $basedir/grapher -profitability -coins-type bitcoins -hashrate 685000000 -power 250 -blocks-data $blocks_data -market-rate-data data/btc-e-btc-usd.dat -energy-cost $energy_cost > data/ati_7970_bitcoin_profitability.dat || exit 1
 $basedir/grapher -profitability -coins-type bitcoins -hashrate 530000000 -power 294 -blocks-data $blocks_data -market-rate-data $mtgox_data -energy-cost $energy_cost > data/ati_5970_bitcoin_profitability.dat || exit 1
 $basedir/grapher -profitability -coins-type bitcoins -hashrate 2270000 -power 65 -blocks-data $blocks_data -market-rate-data $mtgox_data -energy-cost $energy_cost > data/pentium_dual-core_e5400_bitcoin_profitability.dat || exit 1

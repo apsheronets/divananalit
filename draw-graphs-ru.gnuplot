@@ -55,6 +55,23 @@ set autoscale x
 set autoscale y
 unset xrange
 unset yrange
+set xrange ["20140201":]
+set yrange [0:500]
+set output 'графики/себестоимость-майнинга-биткоинов-с-20140201-по-сегодняшний-день.png'
+
+plot \
+  'data/btc-e-btc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:3 with lines title 'цена на BTC-E' axes x1y1 linetype 1, \
+  'data/terraminer_iv_bitcoin_mining_cost.dat' using 1:2 with lines title "себестоимость майнинга на TerraMiner IV" axes x1y1 linetype 2, \
+  'data/terraminer_iv_bitcoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "себестоимость майнинга на TerraMiner IV с учетом амортизации за год" axes x1y1 linetype 3, \
+  'data/bitcoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
+
+
+set autoscale x
+set autoscale y
+unset xrange
+unset yrange
 set xrange ["20100701":"20130201"]
 set yrange [0:15]
 set output 'графики/доходность-майнинга-биткоинов-до-20130201.png'
@@ -98,6 +115,20 @@ plot \
 
 set autoscale x
 set autoscale y
+set xrange ["20140201":]
+set yrange [0:500]
+set output 'графики/доходность-майнинга-биткоинов-с-20140201-по-сегодняшний-день.png'
+
+plot \
+  'data/btc-e-btc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
+  'data/btc-e-btc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:3 with lines title 'цена на BTC-E' axes x1y1 linetype 1, \
+  'data/terraminer_iv_bitcoin_profitability.dat' using 1:2 with lines title "доход от TerraMiner IV в день" linetype 3 axes x1y1, \
+  'data/bitcoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
+
+
+set autoscale x
+set autoscale y
 set xrange ["20120701":]
 #set yrange [0:500]
 set y2label 'BTC'
@@ -130,8 +161,8 @@ plot \
   'data/btc-e-ltc-usd.dat' u 1:2:3 w filledcu axes x1y1 notitle, \
   'data/btc-e-ltc-usd.dat' using 1:2 with lines notitle axes x1y1 linetype 1, \
   'data/btc-e-ltc-usd.dat' using 1:3 with lines title 'курс лайткоина на BTC-E' axes x1y1 linetype 1, \
-  'data/ati_7970_litecoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970" axes x1y1, \
-  'data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970 с учетом амортизации за год" axes x1y1, \
+  'data/ati_7970_litecoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970" axes x1y1 linetype 2, \
+  'data/ati_7970_litecoin_mining_cost_with_1_year_amortization.dat' using 1:2 with lines title "стоимость майнинга на GPU ATI 7970 с учетом амортизации за год" axes x1y1 linetype 3, \
   'data/litecoin-blocks.dat' using 2:3 with lines title "сложность" linetype 7 axes x1y2
 
 set autoscale x
