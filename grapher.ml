@@ -32,7 +32,7 @@ let fill_litecoin_blocks_hash hash from_file =
         let date = List.nth l 1 in
         let difficulty = float_of_string (List.nth l 2) in
         Hashtbl.add hash date (block_number, difficulty)
-      with e -> Printf.eprintf "this is a bullshit not a litecoin block data: %s\n" (Printexc.to_string e)
+      with e -> Printf.eprintf "this is a bullshit not a litecoin block data: %S: %s\n" l (Printexc.to_string e)
     )
     (lines from_file)
 
