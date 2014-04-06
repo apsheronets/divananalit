@@ -171,6 +171,27 @@ set logscale y2
 set output 'img/litecoin-mining-cost-logscale.png'
 replot
 
+set autoscale x
+set autoscale y
+unset xrange
+unset yrange
+set xrange ["20100701":]
+set yrange [0.01:]
+set logscale y
+set logscale y2
+set output 'img/bitcoin-self-cost-logscale.png'
+
+plot \
+  'data/mtgox-btc-usd.dat' using 1:5 with lines title 'MtGox Bitcoin price' axes x1y1, \
+  'data/pentium_dual-core_e5400_mining_cost.dat' using 1:2 with lines title "CPU Pentium Dual-Core E5400 mining cost" axes x1y1, \
+  'data/ati_7970_bitcoin_mining_cost.dat' using 1:2 with lines title "GPU ATI 7970 mining cost" axes x1y1, \
+  'data/avalion_asic_2_bitcoin_mining_cost.dat' using 1:2 with lines title "Avalon ASIC #2 mining cost" linetype 8 axes x1y1, \
+  'data/bitcoin-blocks.dat' using 2:6 with lines title "mining difficulty" linetype 7 axes x1y2
+
+set terminal pngcairo transparent enhanced font "Helvetica,10" size 600, 400
+set output 'графики/себестоимость-майнинга-биткоинов-логарифмическая-шкала-600x400.png'
+replot
+
 unset logscale y
 unset logscale y2
 
