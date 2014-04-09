@@ -194,6 +194,7 @@ replot
 
 unset logscale y
 unset logscale y2
+set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
 
 set autoscale x
 set autoscale y
