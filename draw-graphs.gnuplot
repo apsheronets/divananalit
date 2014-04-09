@@ -200,7 +200,7 @@ set autoscale x
 set autoscale y
 unset xrange
 unset yrange
-set xrange ["20130501":]
+set xrange ["20130501":"20140301"]
 #set yrange [0:20]
 set y2label '%'
 set grid x y y2
