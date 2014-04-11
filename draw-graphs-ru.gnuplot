@@ -176,9 +176,10 @@ set logscale y2
 set output 'графики/себестоимость-майнинга-биткоинов-логарифмическая-шкала.png'
 
 plot \
-  'data/mtgox-btc-usd.dat' using 1:5 with lines title 'курс биткоина на MtGox' axes x1y1, \
-  'data/pentium_dual-core_e5400_mining_cost.dat' using 1:2 with lines title "стоимость майнинга биткоинов на CPU Pentium Dual-Core E5400" axes x1y1, \
-  'data/ati_7970_bitcoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга биткоинов на GPU ATI 7970" axes x1y1, \
+  'data/mtgox-btc-usd.dat' using 1:5 with lines title 'курс биткоина на MtGox' axes x1y1 linetype 1, \
+  'data/btc-e-btc-usd.dat' using 1:5 with lines title 'курс биткоина на BTC-E' axes x1y1 linetype 1, \
+  'data/pentium_dual-core_e5400_mining_cost.dat' using 1:2 with lines title "стоимость майнинга биткоинов на CPU Pentium Dual-Core E5400" axes x1y1 linetype 2, \
+  'data/ati_7970_bitcoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга биткоинов на GPU ATI 7970" axes x1y1 linetype 3, \
   'data/avalion_asic_2_bitcoin_mining_cost.dat' using 1:2 with lines title "стоимость майнинга на Avalon ASIC #2" linetype 8 axes x1y1, \
   'data/bitcoin-blocks.dat' using 2:6 with lines title "сложность" linetype 7 axes x1y2
 
