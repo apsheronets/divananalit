@@ -213,3 +213,23 @@ plot \
   'data/mtgox-btc-usd.dat' using 1:2 with lines title 'mtgox price' axes x1y1 linetype 1, \
   'data/btc-e-btc-usd.dat' using 1:2 with lines title 'btc-e bitcoin price' axes x1y1 linetype 2
 
+set autoscale x
+set autoscale y
+set xrange [30:2500]
+set yrange [0:800]
+unset y2label
+unset xdata
+unset format
+set xlabel 'Mhash/sec per USD'
+set ylabel 'Bitcoin price needed to cover hardware cost, USD'
+set xtics 200
+set ytics 50
+unset y2tics
+set grid x y
+set output 'img/bitcoin-price-needed-to-cover-hardware-cost.png'
+
+plot \
+  'data/mining-hardware-recoupment.dat' using 1:2 with lines title "if difficulty will rise up for 5% every 2 weeks", \
+  'data/mining-hardware-recoupment.dat' using 1:3 with lines title "if difficulty will rise up for 15% every 2 weeks", \
+  'data/mining-hardware-recoupment.dat' using 1:4 with lines title "if difficulty will rise up for 25% every 2 weeks"
+

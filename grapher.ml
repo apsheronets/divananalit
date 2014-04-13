@@ -137,10 +137,25 @@ let self_cost f coins_type blocks_file energy_cost hashrate power =
 let amortized_self_cost time hardware_cost = self_cost (amortizated_course time hardware_cost)
 let self_cost = self_cost course
 
+let (>>) f g = g f
+
+let recoupment difficulty =
+  let price weekly_difficulty_rise x =
+    (((1. -. (1. -. weekly_difficulty_rise)) *. (difficulty /. (2. ** 32.))) /. x)
+    *. (60. *. 60. *. 24. *. 14.) in
+  for x = 1 to 5000 do
+    [0.05; 0.15; 0.25] >> List.map (fun weekly_difficulty_rise ->
+      price weekly_difficulty_rise (float_of_int x)
+    ) >> fun results ->
+    let results = String.concat " " (List.map string_of_float results) in
+    printf "%d %s\n" x results
+  done
+
 type graph_types =
   | SelfCost
   | AmortizedSelfCost of float
   | Profitability
+  | Recoupment
 
 let () =
 
@@ -150,6 +165,7 @@ let () =
   let energy_cost   = ref None in
   let hardware_cost = ref None in
   let hashrate      = ref None in
+  let difficulty = ref 0. in
   let power = ref 0. in
   let block_data = ref "" in
   let market_rate_data = ref "" in
@@ -186,76 +202,88 @@ let () =
     "-market-rate-data",
       Arg.Set_string market_rate_data,
       "";
+    "-mining-hardware-recoupment",
+      Arg.Unit (fun () -> graph_type := Some Recoupment),
+      "";
+    "-difficulty",
+      Arg.Set_float difficulty,
+      "";
   ] in
   Arg.parse l (fun _ -> raise (Arg.Bad help)) help;
 
-  let compiled_lines =
-    match !graph_type with
-    | None -> assert false
-    | Some Profitability ->
-        let coins_type =
-          match !coins_type with
-          | None -> assert false
-          | Some x -> x in
-        let market_rate_data =
-          match !market_rate_data with
-          | "" -> assert false
-          | x -> x in
-        let block_data =
-          match !block_data with
-          | "" -> assert false
-          | x -> x in
-        let energy_cost =
-          match !energy_cost with
-          | Some x -> x
-          | None -> assert false in
-        let hashrate =
-          match !hashrate with
-          | Some x -> x
-          | None -> assert false in
-        let power = !power in
-        profitability coins_type market_rate_data block_data energy_cost hashrate power
-    | Some SelfCost ->
-        let coins_type =
-          match !coins_type with
-          | None -> assert false
-          | Some x -> x in
-        let block_data =
-          match !block_data with
-          | "" -> assert false
-          | x -> x in
-        let energy_cost =
-          match !energy_cost with
-          | Some x -> x
-          | None -> assert false in
-        let hashrate =
-          match !hashrate with
-          | Some x -> x
-          | None -> assert false in
-        let power = !power in
-        self_cost coins_type block_data energy_cost hashrate power
-    | Some (AmortizedSelfCost time) ->
-        let coins_type =
-          match !coins_type with
-          | None -> assert false
-          | Some x -> x in        let hardware_cost =
-          match !hardware_cost with
-          | None -> assert false
-          | Some x -> x in
-        let block_data =
-          match !block_data with
-          | "" -> assert false
-          | x -> x in
-        let energy_cost =
-          match !energy_cost with
-          | Some x -> x
-          | None -> assert false in
-        let hashrate =
-          match !hashrate with
-          | Some x -> x
-          | None -> assert false in
-        let power = !power in
+  match !graph_type with
+  | None -> assert false
+  | Some Profitability ->
+      let coins_type =
+        match !coins_type with
+        | None -> assert false
+        | Some x -> x in
+      let market_rate_data =
+        match !market_rate_data with
+        | "" -> assert false
+        | x -> x in
+      let block_data =
+        match !block_data with
+        | "" -> assert false
+        | x -> x in
+      let energy_cost =
+        match !energy_cost with
+        | Some x -> x
+        | None -> assert false in
+      let hashrate =
+        match !hashrate with
+        | Some x -> x
+        | None -> assert false in
+      let power = !power in
+      let compiled_lines =
+        profitability coins_type market_rate_data block_data energy_cost hashrate power in
+      Stream.iter (print_endline) compiled_lines
+  | Some SelfCost ->
+      let coins_type =
+        match !coins_type with
+        | None -> assert false
+        | Some x -> x in
+      let block_data =
+        match !block_data with
+        | "" -> assert false
+        | x -> x in
+      let energy_cost =
+        match !energy_cost with
+        | Some x -> x
+        | None -> assert false in
+      let hashrate =
+        match !hashrate with
+        | Some x -> x
+        | None -> assert false in
+      let power = !power in
+      let compiled_lines =
+        self_cost coins_type block_data energy_cost hashrate power in
+      Stream.iter (print_endline) compiled_lines
+  | Some (AmortizedSelfCost time) ->
+      let coins_type =
+        match !coins_type with
+        | None -> assert false
+        | Some x -> x in        let hardware_cost =
+        match !hardware_cost with
+        | None -> assert false
+        | Some x -> x in
+      let block_data =
+        match !block_data with
+        | "" -> assert false
+        | x -> x in
+      let energy_cost =
+        match !energy_cost with
+        | Some x -> x
+        | None -> assert false in
+      let hashrate =
+        match !hashrate with
+        | Some x -> x
+        | None -> assert false in
+      let power = !power in
+      let compiled_lines =
         amortized_self_cost time hardware_cost coins_type block_data energy_cost hashrate power in
-
-  Stream.iter (print_endline) compiled_lines
+      Stream.iter (print_endline) compiled_lines
+  | Some Recoupment ->
+      let difficulty = !difficulty in
+      recoupment difficulty
 

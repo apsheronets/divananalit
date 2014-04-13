@@ -207,3 +207,23 @@ plot \
   'data/mtgox-btc-usd.dat' using 1:2 with lines title 'цена на MtGox' axes x1y1 linetype 1, \
   'data/btc-e-btc-usd.dat' using 1:2 with lines title 'цена на BTC-E' axes x1y1 linetype 2
 
+set autoscale x
+set autoscale y
+set xrange [30:2500]
+set yrange [0:800]
+unset y2label
+unset xdata
+unset format
+set xlabel 'мегахешей в секунду на доллар'
+set ylabel 'необходимая цена биткоина для покрытия стоимости оборудования'
+set xtics 200
+set ytics 50
+unset y2tics
+set grid x y
+set output 'графики/необходимая-цена-биткоина-для-покрытия-стоимости-оборудования.png'
+
+plot \
+  'data/mining-hardware-recoupment.dat' using 1:2 with lines title "если сложность будет расти на 5% каждые 2 недели", \
+  'data/mining-hardware-recoupment.dat' using 1:3 with lines title "если сложность будет расти на 15% каждые 2 недели", \
+  'data/mining-hardware-recoupment.dat' using 1:4 with lines title "если сложность будет расти на 25% каждые 2 недели"
+
