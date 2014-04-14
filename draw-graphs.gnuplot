@@ -233,3 +233,29 @@ plot \
   'data/mining-hardware-recoupment.dat' using 1:3 with lines title "if difficulty will rise up for 15% every 2 weeks", \
   'data/mining-hardware-recoupment.dat' using 1:4 with lines title "if difficulty will rise up for 25% every 2 weeks"
 
+set xdata time
+set timefmt "%Y%m%d"
+set format x "%d.%m.%y"
+
+set autoscale x
+set autoscale y
+unset xrange
+set yrange [-20:50]
+set xrange ["20100101":]
+unset xlabel
+set ylabel 'mining difficulty change, %'
+set logscale y2
+set ytics 5
+unset xtics
+unset y2tics
+unset grid
+set grid x y
+set output 'img/bitcoin-difficulty-changes.png'
+
+delta_v(x) = ( vD = ((x - old_v) / old_v) * 100, old_v = x, vD)
+old_v = NaN
+
+plot \
+  'data/bitcoin-blocks.dat' using 2:(delta_v($6)) with lines title 'mining difficulty change' linetype 3 axes x1y1, \
+  'data/bitcoin-blocks.dat' using 2:6 with lines title "mining difficulty" linetype 7 axes x1y2
+
