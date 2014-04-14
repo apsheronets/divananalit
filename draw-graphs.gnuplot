@@ -215,14 +215,14 @@ plot \
 
 set autoscale x
 set autoscale y
-set xrange [30:2500]
+set xrange [30:2000]
 set yrange [0:800]
 unset y2label
 unset xdata
 unset format
 set xlabel 'Mhash/sec per USD'
 set ylabel 'Bitcoin price needed to cover hardware cost, USD'
-set xtics 200
+set xtics 100
 set ytics 50
 unset y2tics
 set grid x y
@@ -230,8 +230,8 @@ set output 'img/bitcoin-price-needed-to-cover-hardware-cost.png'
 
 plot \
   'data/mining-hardware-recoupment.dat' using 1:2 with lines title "if difficulty will rise up for 5% every 2 weeks", \
-  'data/mining-hardware-recoupment.dat' using 1:3 with lines title "if difficulty will rise up for 15% every 2 weeks", \
-  'data/mining-hardware-recoupment.dat' using 1:4 with lines title "if difficulty will rise up for 25% every 2 weeks"
+  'data/mining-hardware-recoupment.dat' using 1:3 with lines title "if difficulty will rise up for 20% every 2 weeks", \
+  'data/mining-hardware-recoupment.dat' using 1:4 with lines title "if difficulty will rise up for 30% every 2 weeks"
 
 set xdata time
 set timefmt "%Y%m%d"

@@ -140,11 +140,17 @@ let self_cost = self_cost course
 let (>>) f g = g f
 
 let recoupment difficulty =
-  let price weekly_difficulty_rise x =
-    (((1. -. (1. -. weekly_difficulty_rise)) *. (difficulty /. (2. ** 32.))) /. x)
-    *. (60. *. 60. *. 24. *. 14.) in
+  let reward = 25. (* FIXME *) in
+  let hashrate = 1000. in
+  let price weekly_difficulty_rise mhashes_per_dollar =
+    let hashes_per_dollar = mhashes_per_dollar *. 1000000. in
+    let hardware_cost = hashrate /. hashes_per_dollar in
+    let income_per_sec = coins_income reward difficulty hashrate in
+    let income_per_2weeks = income_per_sec *. 60. *. 60. *. 24. *. 14. in
+    let total_bitcoins = income_per_2weeks /. (1. -. (1. -. weekly_difficulty_rise)) in
+    hardware_cost /. total_bitcoins in
   for x = 1 to 5000 do
-    [0.05; 0.15; 0.25] >> List.map (fun weekly_difficulty_rise ->
+    [0.05; 0.20; 0.30] >> List.map (fun weekly_difficulty_rise ->
       price weekly_difficulty_rise (float_of_int x)
     ) >> fun results ->
     let results = String.concat " " (List.map string_of_float results) in
