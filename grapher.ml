@@ -147,10 +147,10 @@ let recoupment difficulty =
     let hardware_cost = hashrate /. hashes_per_dollar in
     let income_per_sec = coins_income reward difficulty hashrate in
     let income_per_2weeks = income_per_sec *. 60. *. 60. *. 24. *. 14. in
-    let total_bitcoins = income_per_2weeks /. (1. -. (1. -. weekly_difficulty_rise)) in
+    let total_bitcoins = income_per_2weeks /. (1. -. (1. /. weekly_difficulty_rise)) in
     hardware_cost /. total_bitcoins in
   for x = 1 to 5000 do
-    [0.05; 0.20; 0.30] >> List.map (fun weekly_difficulty_rise ->
+    [1.05; 1.20; 1.30] >> List.map (fun weekly_difficulty_rise ->
       price weekly_difficulty_rise (float_of_int x)
     ) >> fun results ->
     let results = String.concat " " (List.map string_of_float results) in
