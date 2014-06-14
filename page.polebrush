@@ -52,6 +52,30 @@ h2. Difference between MtGox and BTC-E bitcoin prices
 
 !graphs/mtgox-btce-difference.png!
 
+Rest in peace, sweet MtGox.
+
+h2. Bitfinex swap rates data (lendbook)
+
+h3. Bitfinex lendbook for USD
+
+!/graphs/bitfinex-lendbook-usd-all-time.png!
+
+h3. Bitfinex lendbook for BTC
+
+!/graphs/bitfinex-lendbook-btc-all-time.png!
+
+h3. Bitfinex lendbook for LTC
+
+!/graphs/bitfinex-lendbook-ltc-all-time.png!
+
+h2. Bitcoin mining difficulty change
+
+!/graphs/bitcoin-difficulty-changes.png!
+
+h2. Will my mining investment ever be in profit?
+
+!graphs/bitcoin-price-needed-to-cover-hardware-cost.png!
+
 h2. Computation parameters
 
 * Power rate: 0.12$ per KWh
