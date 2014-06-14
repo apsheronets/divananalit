@@ -54,6 +54,7 @@ $basedir/grapher -mining-hardware-recoupment -difficulty `tail -n1 data/bitcoin-
 
 mkdir -p img
 $basedir/draw-graphs.gnuplot || exit 1
+$basedir/draw-bitfinex-lendbook.gnuplot || exit 1
 mkdir -p графики
 $basedir/draw-graphs-ru.gnuplot || exit 1
 
