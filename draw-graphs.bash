@@ -5,25 +5,25 @@ dst=$1
 
 $basedir/get-bitcoin-blocks.bash || (echo "can't get bitcoin blocks"; exit 1)
 $basedir/get-litecoin-blocks.bash || (echo "can't get litecoin blocks"; exit 1)
-ruby $basedir/get-btce-ltc-usd.rb  > data/btc-e-ltc-usd.dat || (echo "can't get btce-ltc-usd prices"; exit 1)
-ruby $basedir/get-btce-ltc-btc.rb  > data/btc-e-ltc-btc.dat || (echo "can't get btce-ltc-btc prices"; exit 1)
-
-ruby $basedir/get-btce-btc-usd.rb  > data/btc-e-btc-usd.dat~ || (echo "can't get btce-btc-usd prices"; exit 1)
-cat $basedir/btce-btc-usd-from-bitcoincharts.dat >> data/btc-e-btc-usd.dat~
-sort data/btc-e-btc-usd.dat~ | uniq -w 8 > data/btc-e-btc-usd.dat
+#ruby $basedir/get-btce-ltc-usd.rb  > data/btc-e-ltc-usd.dat || (echo "can't get btce-ltc-usd prices"; exit 1)
+#ruby $basedir/get-btce-ltc-btc.rb  > data/btc-e-ltc-btc.dat || (echo "can't get btce-ltc-btc prices"; exit 1)
+#
+#ruby $basedir/get-btce-btc-usd.rb  > data/btc-e-btc-usd.dat~ || (echo "can't get btce-btc-usd prices"; exit 1)
+#cat $basedir/btce-btc-usd-from-bitcoincharts.dat >> data/btc-e-btc-usd.dat~
+#sort data/btc-e-btc-usd.dat~ | uniq -w 8 > data/btc-e-btc-usd.dat
 
 ##ruby $basedir/get-bitfinex-btc-usd.rb  > data/bitfinex-btc-usd.dat || (echo "can't get bitfinex-btc-usd prices"; exit 1)
 #curl -s 'http://api.bitcoincharts.com/v1/trades.csv?symbol=bitfinexUSD&start=1402782519' > data/bitfinex-btc-usd-trades.csv || (echo "can't get bitfinex-btc-usd-trades"; exit 1)
 #sed 's/,/ /g' < data/bitfinex-btc-usd-trades.csv > data/bitfinex-btc-usd-trades.dat
 
-ruby $basedir/get-mtgox-btc-usd.rb > data/mtgox-btc-usd.dat~ || (echo "can't get mtgox-btc-usd prices"; exit 1)
-[[ `cat data/mtgox-btc-usd.dat~` == "" ]] && (echo "mtgox-btc-usd prices are empty"; exit 1)
-[[ `cat data/btc-e-ltc-usd.dat`  == "" ]] && (echo "btce-ltc-usd prices are empty"; exit 1)
-[[ `cat data/btc-e-btc-usd.dat~`  == "" ]] && (echo "btce-btc-usd prices are empty"; exit 1)
-cat $basedir/mtgox-btc-usd.dat >> data/mtgox-btc-usd.dat~
-sort data/mtgox-btc-usd.dat~ | uniq -w 8 > data/mtgox-btc-usd.dat
-
-join <(sort -k1,1 data/btc-e-btc-usd.dat) <(sort -k1,1 data/mtgox-btc-usd.dat) > data/mtgox-and-btce.dat
+#ruby $basedir/get-mtgox-btc-usd.rb > data/mtgox-btc-usd.dat~ || (echo "can't get mtgox-btc-usd prices"; exit 1)
+#[[ `cat data/mtgox-btc-usd.dat~` == "" ]] && (echo "mtgox-btc-usd prices are empty"; exit 1)
+#[[ `cat data/btc-e-ltc-usd.dat`  == "" ]] && (echo "btce-ltc-usd prices are empty"; exit 1)
+#[[ `cat data/btc-e-btc-usd.dat~`  == "" ]] && (echo "btce-btc-usd prices are empty"; exit 1)
+#cat $basedir/mtgox-btc-usd.dat >> data/mtgox-btc-usd.dat~
+#sort data/mtgox-btc-usd.dat~ | uniq -w 8 > data/mtgox-btc-usd.dat
+#
+#join <(sort -k1,1 data/btc-e-btc-usd.dat) <(sort -k1,1 data/mtgox-btc-usd.dat) > data/mtgox-and-btce.dat
 
 #rm -f $basedir/img/*
 
