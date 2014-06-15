@@ -24,8 +24,8 @@ set output 'img/bitfinex-lendbook-usd-all-time.png'
 bitfinex_percent(x) = x / 365
 
 plot \
-  'data/bitfinex-lendbook-usd.dat' using 1:(bitfinex_percent($2)) with lines title 'best swap ask for USD' linetype 1, \
-  'data/bitfinex-lendbook-usd.dat' using 1:(bitfinex_percent($3)) with lines title 'best swap bid for USD' linetype 2
+  'data/bitfinex-lendbook-usd.dat' using 1:(bitfinex_percent($3)) with lines title 'best swap bid for USD' linetype 2, \
+  'data/bitfinex-lendbook-usd.dat' using 1:(bitfinex_percent($2)) with lines title 'best swap ask for USD' linetype 1
 #  'data/bitfinex-btc-usd-trades.dat' using 1:2 with lines title 'Bitfinex BTCUSD' axes x1y2 linetype 3, \
 
 unset y2label
