@@ -6,7 +6,11 @@ require 'date'
 
 json = JSON.parse($stdin.read)
 best_ask = json["asks"][0]["rate"]
-best_bid = json["bids"][0]["rate"]
+if json["bids"][0].nil?
+  best_bid = 0
+else
+  best_bid = json["bids"][0]["rate"]
+end
 unixtime = DateTime.now.strftime("%s")
 
 file = ARGV[0]
