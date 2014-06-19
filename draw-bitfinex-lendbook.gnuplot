@@ -18,7 +18,7 @@ set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
 set autoscale x
 set autoscale y
 unset xrange
-unset yrange
+set yrange [0:1]
 set output 'img/bitfinex-lendbook-usd-all-time.png'
 
 bitfinex_percent(x) = x / 365
