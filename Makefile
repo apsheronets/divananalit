@@ -138,6 +138,13 @@ img/bitfinex-lendbook-usd-all-time.png \
     data/bitfinex-lendbook-ltc.dat
 	$(basedir)/draw-bitfinex-lendbook.gnuplot
 
+.PHONY: bitfinex-lendbooks
+
+bitfinex-lendbooks: \
+  img/bitfinex-lendbook-usd-all-time.png \
+  img/bitfinex-lendbook-btc-all-time.png \
+  img/bitfinex-lendbook-ltc-all-time.png
+
 img/bitcoin-and-litecoin-profitability.png \
   img/bitcoin-difficulty-changes.png \
   img/bitcoin-mining-cost-from-20130201-to-now.png \
