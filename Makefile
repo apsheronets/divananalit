@@ -30,9 +30,8 @@ $(name): $(optobjs)
 
 basedir = $(shell pwd)
 
-data/bitcoin-blocks.csv:
-	# 36 is for 6 hours resolution
-	wget -q http://blockexplorer.com/q/nethash/18 -O data/bitcoin-blocks.csv
+data/bitcoin-blocks.csv: get-bitcoin-blocks.bash
+	./get-bitcoin-blocks.bash
 
 data/bitcoin-blocks-wo-header.csv: data/bitcoin-blocks.csv
 	tail -n +16 data/bitcoin-blocks.csv > data/bitcoin-blocks-wo-header.csv
@@ -41,8 +40,8 @@ data/bitcoin-blocks.dat: data/bitcoin-blocks-wo-header.csv
 	rm -f $@
 	ruby $(basedir)/csv-unixtime-to-dat.rb data/bitcoin-blocks-wo-header.csv $@
 
-data/litecoin-blocks:
-	wget -q http://komar.lexs.blasux.ru/litecoin-blocks-difficulty -O $@
+data/litecoin-blocks: get-litecoin-blocks.bash
+	./get-litecoin-blocks.bash
 
 data/litecoin-blocks.dat: data/litecoin-blocks
 	ruby $(basedir)/unixtime-to-dat.rb data/litecoin-blocks $@
