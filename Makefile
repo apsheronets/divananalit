@@ -154,6 +154,7 @@ img/bitcoin-and-litecoin-profitability.png \
   img/litecoin-mining-cost.png \
   img/mtgox-btce-difference.png: \
     draw-graphs.gnuplot \
+    data/btc-e-ltc-btc.dat \
     data/avalion_asic_2_bitcoin_mining_cost.dat \
     data/avalion_asic_2_bitcoin_mining_cost_with_1_year_amortization.dat \
     data/terraminer_iv_bitcoin_mining_cost.dat \
@@ -183,7 +184,6 @@ img/bitcoin-and-litecoin-profitability.png \
   графики/доходность-майнинга-биткоинов-с-20130801-по-сегодняший-день.png \
   графики/доходность-майнинга-биткоинов-с-20140201-по-сегодняшний-день.png \
   графики/изменение-сложности-майнинга-биткоинов.png \
-  графики/курс-биткоина.png \
   графики/необходимая-цена-биткоина-для-покрытия-стоимости-оборудования.png \
   графики/разнциа-между-mtgox-и-btce.png \
   графики/себестоимость-майнинга-биткоинов-до-20130201.png \
