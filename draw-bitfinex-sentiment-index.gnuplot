@@ -15,7 +15,6 @@ set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
 set autoscale x
 set autoscale y
 unset xrange
-set yrange [0:100]
 set output 'img/bitfinex-sentiment-index-all-time.png'
 
 plot \
