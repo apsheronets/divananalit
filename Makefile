@@ -142,7 +142,12 @@ img/bitfinex-lendbook-usd-all-time.png \
     data/bitfinex-lendbook-usd.dat \
     data/bitfinex-lendbook-btc.dat \
     data/bitfinex-lendbook-ltc.dat
-	$(basedir)/draw-bitfinex-lendbook.gnuplot
+	./draw-bitfinex-lendbook.gnuplot
+
+img/bitfinex-sentiment-index-all-time.png: \
+  draw-bitfinex-sentiment-index.gnuplot \
+  data/bitfinex-sentiment-index.dat
+	./draw-bitfinex-sentiment-index.gnuplot
 
 .PHONY: bitfinex-lendbooks
 
@@ -150,7 +155,8 @@ bitfinex-lendbooks: \
   img/bitfinex-lendbook-usd-all-time.png \
   img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
-  img/bitfinex-lendbook-ltc-all-time.png
+  img/bitfinex-lendbook-ltc-all-time.png \
+  img/bitfinex-sentiment-index-all-time.png
 
 img/bitcoin-and-litecoin-profitability.png \
   img/bitcoin-difficulty-changes.png \
@@ -250,6 +256,7 @@ charts: \
   img/litecoin-mining-cost-logscale.png \
   img/litecoin-mining-cost.png \
   img/mtgox-btce-difference.png \
+  img/bitfinex-sentiment-index-all-time.png \
   графики/доходность-гигахеша-на-майнинге-биткоинов-с-20130701-по-сегодняшний-день.png \
   графики/доходность-майнинга-биткоинов-до-20130201.png \
   графики/доходность-майнинга-биткоинов-и-лайткоинов.png \
