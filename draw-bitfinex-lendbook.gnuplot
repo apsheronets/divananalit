@@ -31,7 +31,7 @@ plot \
 now = `date +%s`
 one_day_past = now - 86400
 eval(sprintf('set xrange ["%d":]', one_day_past))
-set format x "%d:%H:%M"
+set format x "%H:%M"
 set output 'img/bitfinex-lendbook-usd-last-day.png'
 replot
 
