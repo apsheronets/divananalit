@@ -56,9 +56,13 @@ Rest in peace, sweet MtGox.
 
 h2. Bitfinex swap rates data (lendbook)
 
+You can see intercrossing between best ask and bid prices. "This happens because of different swap time ranges.":https://bitcointalk.org/index.php?topic=229438.msg7320978#msg7320978
+
 h3. Bitfinex lendbook for USD
 
 !/graphs/bitfinex-lendbook-usd-all-time.png!
+
+!/graphs/bitfinex-lendbook-usd-last-day.png!
 
 h3. Bitfinex lendbook for BTC
 
@@ -67,6 +71,14 @@ h3. Bitfinex lendbook for BTC
 h3. Bitfinex lendbook for LTC
 
 !/graphs/bitfinex-lendbook-ltc-all-time.png!
+
+h2. Bitfinex Sentiment Index
+
+I have no idea what the fuck is it, but it looks like insider information.
+
+See "https://www.bitfinex.com/pages/stats":https://www.bitfinex.com/pages/stats for... I don't know what.
+
+!/graphs/bitfinex-sentiment-index-all-time.png!
 
 h2. Bitcoin mining difficulty change
 
@@ -106,5 +118,7 @@ bc. git clone http://divananalit.org/git/divananalit
 h2. Questions? Suggestions?
 
 "pizdobol@divananlit.org":mailto:pizdobol@divananlit.org
+
+And just in case you have no idea where to put your bitcoins: "1Nhk2JDqGgsEQVWzuK6PnV5FV1W5ErUmL8":https://blockchain.info/address/1Nhk2JDqGgsEQVWzuK6PnV5FV1W5ErUmL8
 
 p[en]=. ==<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://komar.in/img/creative-commons.png" /></a><br />All articles on this site are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.==
