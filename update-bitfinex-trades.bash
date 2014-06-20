@@ -3,7 +3,7 @@
 source $HOME/.rvm/scripts/rvm
 basedir=`dirname $0`
 
-if [[ -f bitfinexUSD.dat ]]
+if [ ! -f $basedir/data/bitfinexUSD.dat ]
 then
   wget http://api.bitcoincharts.com/v1/csv/bitfinexUSD.csv.gz -O $basedir/data/bitfinexUSD.csv.gz || exit 1
   gunzip -c $basedir/data/bitfinexUSD.csv.gz | sed 's/,/ /g' > $basedir/data/bitfinexUSD.dat
