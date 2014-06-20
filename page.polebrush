@@ -60,9 +60,9 @@ You can see intercrossing between best ask and bid prices. "This happens because
 
 h3. Bitfinex lendbook for USD
 
-!/graphs/bitfinex-lendbook-usd-all-time.png!
+!/graphs/bitfinex-lendbook-usd-all-time.png(Bitfinex swap rates chart for USD - all time)!
 
-!/graphs/bitfinex-lendbook-usd-last-day.png!
+!/graphs/bitfinex-lendbook-usd-last-day.png(Bitfinex swap rates chart for USD - last day)!
 
 h3. Bitfinex lendbook for BTC
 
@@ -78,7 +78,7 @@ I have no idea what the fuck is it, but it looks like insider information.
 
 See "https://www.bitfinex.com/pages/stats":https://www.bitfinex.com/pages/stats for... I don't know what.
 
-!/graphs/bitfinex-sentiment-index-all-time.png!
+!/graphs/bitfinex-sentiment-index-all-time.png(Bitfinex Sentiment Index chart)!
 
 h2. Bitcoin mining difficulty change
 
