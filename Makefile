@@ -129,6 +129,7 @@ data/mining-hardware-recoupment.dat: grapher data/bitcoin-blocks.dat
 	$(basedir)/grapher -mining-hardware-recoupment -difficulty `tail -n1 data/bitcoin-blocks.dat | cut -d ' ' -f 5` > $@
 
 img/bitfinex-lendbook-usd-all-time.png \
+  img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
   img/bitfinex-lendbook-ltc-all-time.png: \
     draw-bitfinex-lendbook.gnuplot \
@@ -141,6 +142,7 @@ img/bitfinex-lendbook-usd-all-time.png \
 
 bitfinex-lendbooks: \
   img/bitfinex-lendbook-usd-all-time.png \
+  img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
   img/bitfinex-lendbook-ltc-all-time.png
 
@@ -224,6 +226,7 @@ img/bitcoin-and-litecoin-profitability.png \
 
 charts: \
   img/bitfinex-lendbook-usd-all-time.png \
+  img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
   img/bitfinex-lendbook-ltc-all-time.png \
   img/bitcoin-and-litecoin-profitability.png \

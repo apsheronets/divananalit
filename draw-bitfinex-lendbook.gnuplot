@@ -28,6 +28,15 @@ plot \
   'data/bitfinex-lendbook-usd.dat' using 1:(bitfinex_percent($3)) with lines title 'best swap bid for USD' linetype 2
 #  'data/bitfinex-btc-usd-trades.dat' using 1:2 with lines title 'Bitfinex BTCUSD' axes x1y2 linetype 3, \
 
+now = `date +%s`
+one_day_past = now - 86400
+eval(sprintf('set xrange ["%d":]', one_day_past))
+set format x "%d:%H:%M"
+set output 'img/bitfinex-lendbook-usd-last-day.png'
+replot
+
+set format x "%d.%m.%y"
+
 unset y2label
 unset y2tics
 set autoscale x
