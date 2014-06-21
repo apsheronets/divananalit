@@ -74,7 +74,7 @@ h3. Bitfinex lendbook for LTC
 
 h2. Bitfinex Sentiment Index
 
-bq.. BSI is sentiment index based on Bitfinex users actions not based on a poll, yes BSI use the approach "vote with your wallet not with a click" if a user is not on the market ( he is not long or short) he does not count so if anyone wants to change how the BSI look he needs to put money on the market and go long or short.
+bq.. BSI is sentiment index based on "Bitfinex":https://www.bitfinex.com/?refcode=uzmbxVpj3x users actions not based on a poll, yes BSI use the approach "vote with your wallet not with a click" if a user is not on the market ( he is not long or short) he does not count so if anyone wants to change how the BSI look he needs to put money on the market and go long or short.
 
 example if there are 2 user in the market
 user 1 100 bitcoins long
@@ -83,7 +83,7 @@ BSI will be 1:1
 
 p. See also:
 
-* "https://www.bitfinex.com/pages/stats":https://www.bitfinex.com/pages/stats
+* "https://www.bitfinex.com/pages/stats":https://www.bitfinex.com/pages/stats?refcode=uzmbxVpj3x
 * "https://bitcointalk.org/index.php?topic=129326.msg1380642":https://bitcointalk.org/index.php?topic=129326.msg1380642
 
 !/graphs/bitfinex-sentiment-index-all-time.png(Bitfinex Sentiment Index chart)!
