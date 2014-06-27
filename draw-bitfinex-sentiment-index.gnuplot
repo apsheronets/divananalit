@@ -23,3 +23,13 @@ plot \
   'data/bitfinexUSD.dat' using 1:2 with lines title 'Bitfinex BTCUSD' axes x1y2 linetype 3, \
   'data/bitfinex-sentiment-index.dat' using 1:2 with lines title 'Bitfinex sentiment index, green thing' linetype 2
 #  'data/bitfinex-sentiment-index.dat' using 1:3 with lines title 'Bitfinex sentiment index, red thing' linetype 1
+
+now = `date +%s`
+three_days_past = now - 259200
+eval(sprintf('set xrange ["%d":]', three_days_past))
+unset yrange
+replot
+set format x "%d.%m.%y %H:%M"
+
+set output 'img/bitfinex-sentiment-index--three-days.png'
+
