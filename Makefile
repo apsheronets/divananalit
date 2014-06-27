@@ -144,7 +144,8 @@ img/bitfinex-lendbook-usd-all-time.png \
     data/bitfinex-lendbook-ltc.dat
 	./draw-bitfinex-lendbook.gnuplot
 
-img/bitfinex-sentiment-index-all-time.png: \
+img/bitfinex-sentiment-index-all-time.png \
+    img/bitfinex-sentiment-index-last-three-days.png: \
   draw-bitfinex-sentiment-index.gnuplot \
   data/bitfinex-sentiment-index.dat \
   data/bitfinexUSD.dat
