@@ -46,14 +46,14 @@ data/litecoin-blocks: get-litecoin-blocks.bash
 data/litecoin-blocks.dat: data/litecoin-blocks
 	ruby $(basedir)/unixtime-to-dat.rb data/litecoin-blocks $@
 
-#data/btc-e-ltc-usd.dat:
-#	ruby $(basedir)/get-btce-ltc-usd.rb > $@
-#
-#data/btc-e-ltc-btc.dat:
-#	ruby $(basedir)/get-btce-ltc-btc.rb > $@
-#
-#data/btc-e-btc-usd-fresh.dat:
-#	ruby $(basedir)/get-btce-btc-usd.rb > $@
+data/btc-e-ltc-usd.dat:
+	ruby $(basedir)/get-btce-ltc-usd.rb > $@
+
+data/btc-e-ltc-btc.dat:
+	ruby $(basedir)/get-btce-ltc-btc.rb > $@
+
+data/btc-e-btc-usd-fresh.dat:
+	ruby $(basedir)/get-btce-btc-usd.rb > $@
 
 data/btc-e-btc-usd.dat~: data/btc-e-btc-usd-fresh.dat
 	cat data/btc-e-btc-usd-fresh.dat > $@
@@ -62,8 +62,8 @@ data/btc-e-btc-usd.dat~: data/btc-e-btc-usd-fresh.dat
 data/btc-e-btc-usd.dat: data/btc-e-btc-usd.dat~
 	sort data/btc-e-btc-usd.dat~ | uniq -w 8 > $@
 
-#data/mtgox-btc-usd-fresh.dat:
-#	ruby $(basedir)/get-mtgox-btc-usd.rb > $@
+data/mtgox-btc-usd-fresh.dat:
+	ruby $(basedir)/get-mtgox-btc-usd.rb > $@
 
 data/mtgox-btc-usd.dat~: data/mtgox-btc-usd-fresh.dat
 	cat data/mtgox-btc-usd-fresh.dat > $@
