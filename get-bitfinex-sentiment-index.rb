@@ -20,7 +20,10 @@ require 'selenium-webdriver'
 driver = Selenium::WebDriver.for :firefox
 driver.get "https://www.bitfinex.com/pages/stats"
 
-page = Nokogiri::HTML(driver.page_source)
+#page = Nokogiri::HTML(driver.page_source)
+# bitfinex hided the data into <!-- -->
+commented_part = driver.page_source.match(/<!--\s*<h4>Bitfinex Sentiment Index<\/h4>(.*)-->/m)[1]
+page = Nokogiri::HTML(commented_part)
 
 driver.quit
 
