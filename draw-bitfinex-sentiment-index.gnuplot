@@ -30,5 +30,5 @@ eval(sprintf('set xrange ["%d":]', three_days_past))
 unset yrange
 set output 'img/bitfinex-sentiment-index-three-days.png'
 set format x "%d %H:%M"
-replot
+#replot
 
