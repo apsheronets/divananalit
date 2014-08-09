@@ -137,7 +137,8 @@ data/mining-hardware-recoupment.dat: grapher data/bitcoin-blocks.dat
 img/bitfinex-lendbook-usd-all-time.png \
   img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
-  img/bitfinex-lendbook-ltc-all-time.png: \
+  img/bitfinex-lendbook-ltc-all-time.png \
+  img/bitfinex-lendbook-ltc-last-month.png: \
     draw-bitfinex-lendbook.gnuplot \
     data/bitfinex-lendbook-usd.dat \
     data/bitfinex-lendbook-btc.dat \
@@ -158,6 +159,7 @@ bitfinex-lendbooks: \
   img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
   img/bitfinex-lendbook-ltc-all-time.png \
+  img/bitfinex-lendbook-ltc-last-month.png \
   img/bitfinex-sentiment-index-all-time.png
 
 img/bitcoin-and-litecoin-profitability.png \
@@ -243,6 +245,7 @@ charts: \
   img/bitfinex-lendbook-usd-last-day.png \
   img/bitfinex-lendbook-btc-all-time.png \
   img/bitfinex-lendbook-ltc-all-time.png \
+  img/bitfinex-lendbook-ltc-last-month.png \
   img/bitcoin-and-litecoin-profitability.png \
   img/bitcoin-difficulty-changes.png \
   img/bitcoin-mining-cost-from-20130201-to-now.png \

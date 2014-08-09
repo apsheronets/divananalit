@@ -63,3 +63,10 @@ plot \
   'data/bitfinex-lendbook-ltc.dat' using 1:(bitfinex_percent($2)) with lines title 'best swap ask for LTC', \
   'data/bitfinex-lendbook-ltc.dat' using 1:(bitfinex_percent($3)) with lines title 'best swap bid for LTC'
 
+now = `date +%s`
+one_month_past = now - 2592000
+eval(sprintf('set xrange ["%d":]', one_month_past))
+unset yrange
+set output 'img/bitfinex-lendbook-ltc-last-month.png'
+replot
+
