@@ -1,4 +1,4 @@
-h1. Some interesting bitcoin and litecoin graphs
+h1. Some interesting bitcoin and litecoin charts
 
 toc.
 
@@ -72,6 +72,10 @@ h3. Bitfinex lendbook for LTC
 
 !/graphs/bitfinex-lendbook-ltc-all-time.png!
 
+h3(#th1-lendbook). Bitfinex lendbook for TH1[^new!^]
+
+!/graphs/bitfinex-lendbook-th1-all-time.png!
+
 h2. Bitfinex Sentiment Index
 
 bq.. BSI is sentiment index based on "Bitfinex":https://www.bitfinex.com/?refcode=uzmbxVpj3x users actions not based on a poll, yes BSI use the approach "vote with your wallet not with a click" if a user is not on the market ( he is not long or short) he does not count so if anyone wants to change how the BSI look he needs to put money on the market and go long or short.
@@ -93,6 +97,8 @@ h2. Bitcoin mining difficulty change
 !/graphs/bitcoin-difficulty-changes.png!
 
 h2. Will my mining investment ever be in profit?
+
+See "this thread":https://bitcointalk.org/index.php?topic=570396.0 for description.
 
 !graphs/bitcoin-price-needed-to-cover-hardware-cost.png!
 
@@ -128,5 +134,14 @@ h2. Questions? Suggestions?
 "pizdobol@divananlit.org":mailto:pizdobol@divananlit.org
 
 And just in case you have no idea where to put your bitcoins: "1Nhk2JDqGgsEQVWzuK6PnV5FV1W5ErUmL8":https://blockchain.info/address/1Nhk2JDqGgsEQVWzuK6PnV5FV1W5ErUmL8
+
+h2. Special thanks to
+
+* "Alexey Ignatov aka lexszero":http://lexs.blasux.ru/ for hosting a bitcoin node
+
+h2. See also
+
+* "Blog in russian about cryptocurrencies":http://blog.divananalit.org
+* "About me":http://komar.bitcheese.net/en/about
 
 p[en]=. ==<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://komar.in/img/creative-commons.png" /></a><br />All articles on this site are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.==

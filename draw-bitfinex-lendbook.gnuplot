@@ -70,3 +70,16 @@ unset yrange
 set output 'img/bitfinex-lendbook-ltc-last-month.png'
 replot
 
+set autoscale x
+set autoscale y
+unset xrange
+unset yrange
+set output 'img/bitfinex-lendbook-th1-all-time.png'
+
+bitfinex_percent(x) = x / 365
+
+plot \
+  'data/bitfinex-lendbook-th1.dat' using 1:(bitfinex_percent($2)) with lines title 'best swap ask for TH1', \
+  'data/bitfinex-lendbook-th1.dat' using 1:(bitfinex_percent($3)) with lines title 'best swap bid for TH1'
+
+
