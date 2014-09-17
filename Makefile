@@ -2,7 +2,7 @@
 # OCaml part
 
 packages = extlib
-files = $(shell ls *.ml)
+files = common.ml grapher.ml
 name = grapher
 
 camlc   = ocamlfind ocamlc   $(lib)
