@@ -215,8 +215,8 @@ plot \
 
 set autoscale x
 set autoscale y
-set xrange [30:2000]
-set yrange [0:800]
+set xrange [30:3000]
+set yrange [0:700]
 unset y2label
 unset xdata
 unset format
