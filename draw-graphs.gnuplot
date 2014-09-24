@@ -222,7 +222,7 @@ unset xdata
 unset format
 set xlabel 'Mhash/sec per USD'
 set ylabel 'Bitcoin price needed to cover hardware cost, USD'
-set xtics 100
+set xtics 200
 set ytics 50
 unset y2tics
 set grid x y
