@@ -155,7 +155,7 @@ img/bitfinex-sentiment-index-all-time.png \
     img/bitfinex-sentiment-index-last-three-days.png: \
   draw-bitfinex-sentiment-index.gnuplot \
   data/bitfinex-sentiment-index.dat \
-  data/bitfinex-btc-usd.dat
+  data/detailed-bitfinex-btc-usd.dat
 	./draw-bitfinex-sentiment-index.gnuplot
 
 img/bitfinex-sentiment-index-all-time-wide.png: \
