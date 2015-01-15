@@ -58,6 +58,9 @@ data/btc-e-btc-usd-fresh.dat:
 data/bitfinex-btc-usd.dat:
 	./get-bitfinex-btc-usd.bash
 
+data/detailed-bitfinex-btc-usd.dat:
+	./get-detailed-bitfinex-btc-usd.bash
+
 data/btc-e-btc-usd.dat~: data/btc-e-btc-usd-fresh.dat
 	cat data/btc-e-btc-usd-fresh.dat > $@
 	cat $(basedir)/btce-btc-usd-from-bitcoincharts.dat >> $@
@@ -153,6 +156,12 @@ img/bitfinex-sentiment-index-all-time.png \
   draw-bitfinex-sentiment-index.gnuplot \
   data/bitfinex-sentiment-index.dat \
   data/bitfinex-btc-usd.dat
+	./draw-bitfinex-sentiment-index.gnuplot
+
+img/bitfinex-sentiment-index-all-time-wide.png: \
+  draw-bitfinex-sentiment-index.gnuplot \
+  data/bitfinex-sentiment-index.dat \
+  data/detailed-bitfinex-btc-usd.dat
 	./draw-bitfinex-sentiment-index.gnuplot
 
 .PHONY: bitfinex-lendbooks
