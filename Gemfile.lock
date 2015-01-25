@@ -1,0 +1,9 @@
+GEM
+  specs:
+    pg (0.17.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  pg
