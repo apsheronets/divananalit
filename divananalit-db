@@ -56,3 +56,28 @@ ON orderbook_records
 USING btree
 (orderbook_update_id, price ASC)
 WHERE bid = false;
+
+CREATE TABLE trades (
+  id serial NOT NULL,
+  orderbook_id integer NOT NULL,
+  price numeric(16,8) NOT NULL,
+  amount numeric(16,8) NOT NULL,
+  buy boolean NULL,
+  timestamp timestamp without time zone NOT NULL,
+  tid integer NULL, /* bitfinex crap */
+  CONSTRAINT trades_pkey PRIMARY KEY (id),
+  CONSTRAINT orderbook_id_fk FOREIGN KEY (orderbook_id)
+    REFERENCES orderbooks (id) MATCH SIMPLE
+    ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+CREATE INDEX index_trades_on_orderbook_id_and_timestamp
+ON trades
+USING btree
+(orderbook_id, timestamp DESC);
+CREATE INDEX index_trades_on_orderbook_id_and_tid
+ON trades
+USING btree
+(orderbook_id, tid DESC NULLS LAST);
