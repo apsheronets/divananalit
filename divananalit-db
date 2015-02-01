@@ -81,3 +81,21 @@ CREATE INDEX index_trades_on_orderbook_id_and_tid
 ON trades
 USING btree
 (orderbook_id, tid DESC NULLS LAST);
+
+CREATE TABLE lends (
+  orderbook_id integer NOT NULL,
+  rate numeric(9,4) NOT NULL,
+  amount numeric(16,8) NOT NULL,
+  timestamp timestamp without time zone NOT NULL,
+  CONSTRAINT orderbook_id_fk FOREIGN KEY (orderbook_id)
+    REFERENCES orderbooks (id) MATCH SIMPLE
+    ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+CREATE INDEX index_lends_on_orderbook_id_and_timestamp
+ON lends
+USING btree
+(orderbook_id, timestamp DESC);
+
