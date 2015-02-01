@@ -9,7 +9,9 @@ require 'httparty'
 c = PG.connect( dbname: 'divananalit' )
 c.set_error_verbosity( PG::PQERRORS_VERBOSE )
 
-c.prepare( 'last_timestamp', "SELECT timestamp FROM lends WHERE currency = 'btc' AND exchange = 'bitfinex' ORDER BY timestamp DESC LIMIT 1;" )
+c.exec( 'SET TIME ZONE UTC' )
+
+c.prepare( 'last_timestamp', "SELECT extract (epoch from (timestamp)) AS timestamp FROM lends WHERE currency = 'btc' AND exchange = 'bitfinex' ORDER BY timestamp DESC LIMIT 1;" )
 
 c.prepare( 'check_if_lend_exist', "SELECT 1 FROM lends WHERE currency = 'btc' AND exchange = 'bitfinex' AND timestamp = to_timestamp($1) AND rate = $2 AND amount = $3 LIMIT 1;" )
 
