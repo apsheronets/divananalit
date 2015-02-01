@@ -12,7 +12,9 @@ c.set_error_verbosity( PG::PQERRORS_VERBOSE )
 
 c.exec( 'BEGIN' )
 
-update = Time.now.strftime("%Y-%m-%d %H:%M:%S");
+c.exec( 'SET TIME ZONE UTC' )
+
+update = Time.now.utc.strftime("%Y-%m-%d %H:%M:%S");
 c.prepare( 'insert_orderbook_update', "INSERT INTO orderbook_updates (orderbook_id, created_at) VALUES ((SELECT id FROM orderbooks WHERE exchange = 'bitfinex' AND pair = 'btcusd' LIMIT 1), $1) RETURNING id;" )
 update_id = nil
 c.exec_prepared( 'insert_orderbook_update', [update] ) do |result|
