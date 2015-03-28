@@ -11,7 +11,7 @@ c.set_error_verbosity( PG::PQERRORS_VERBOSE )
 
 c.exec( 'SET TIME ZONE UTC' )
 
-c.prepare( 'last_timestamp', "SELECT extract (epoch from (timestamp)) AS timestamp FROM trades WHERE orderbook_id = (SELECT id FROM orderbooks WHERE exchange = 'bitfinex' AND pair = 'btcusd' LIMIT 1) ORDER BY timestamp DESC LIMIT 1;" )
+c.prepare( 'last_timestamp', "SELECT extract (epoch from (timestamp)) AS timestamp FROM trades WHERE orderbook_id = (SELECT id FROM orderbooks WHERE exchange = 'bitfinex' AND pair = 'btcusd' LIMIT 1) ORDER BY trades.timestamp DESC LIMIT 1;" )
 
 c.prepare( 'check_if_trade_exist', "SELECT 1 FROM trades WHERE orderbook_id = (SELECT id FROM orderbooks WHERE exchange = 'bitfinex' AND pair = 'btcusd' LIMIT 1) AND tid = $1 LIMIT 1;" )
 
