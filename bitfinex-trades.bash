@@ -4,4 +4,4 @@ source $HOME/.rvm/scripts/rvm
 basedir=`dirname $0`
 
 cd $basedir
-bundle exec ruby bitfinex-trades.rb
+while true; do bundle exec ruby bitfinex-trades.rb; done

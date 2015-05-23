@@ -1,1 +1,3 @@
 TMP=/tmp/shit.html; OUT=/home/komar/devel/divananalit.org/index.html; page=/home/komar/devel/divananalit/page.polebrush; echo '<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"/><title>' > $TMP; /home/komar/devel/polebrush/polebrush -get-header < $page >> $TMP; echo '</title><style>' >> $TMP; cat /home/komar/devel/divananalit/style.css >> $TMP; echo '</style></head><body>' >> $TMP; /home/komar/devel/polebrush/polebrush < $page >> $TMP; cat footer.html >> $TMP; xml_pp < $TMP > $OUT
+
+while true; do psql divananalit -F ' ' --no-align < query | tail -n +2 | head -n -1 > orderbook.data && data=orderbook.data output=orderbook-old.png ./draw-orderbook.gnuplot; sleep 30; done
