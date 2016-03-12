@@ -36,12 +36,28 @@ plot \
   'data/detailed-bitfinex-btc-usd.dat' using 1:3 with lines title 'Bitfinex BTCUSD' axes x1y2 linetype 1, \
   'data/bitfinex-sentiment-index.dat' using 1:2 with lines title 'Bitfinex sentiment index, green thing' linetype 2
 
-now = `date +%s`
-three_days_past = now - 259200
-eval(sprintf('set xrange ["%d":]', three_days_past))
-unset yrange
-set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
-set output 'img/bitfinex-sentiment-index-three-days.png'
-set format x "%d %H:%M"
-#replot
+#now = `date +%s`
+#three_days_past = now - 259200
+#eval(sprintf('set xrange ["%d":]', three_days_past))
+#unset yrange
+#set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
+#set output 'img/bitfinex-sentiment-index-three-days.png'
+#set format x "%d %H:%M"
+##replot
+
+set autoscale x
+set autoscale y
+set xrange ["1457745500":]
+set style fill solid 0.5
+set datafile missing "NaN"
+set output 'img/bsi2-all-time.png'
+
+plot \
+  'data/detailed-bitfinex-btc-usd.dat' u 1:2:3 w filledcu axes x1y2 notitle, \
+  'data/detailed-bitfinex-btc-usd.dat' using 1:2 with lines notitle axes x1y2 linetype 1, \
+  'data/detailed-bitfinex-btc-usd.dat' using 1:3 with lines title 'Bitfinex BTCUSD' axes x1y2 linetype 1, \
+  'data/bsi2.dat' using 1:2 with lines title 'BSI2' linetype 2
+#  'data/bitfinex-sentiment-index.dat' using 1:3 with lines title 'Bitfinex sentiment index, red thing' linetype 1
+
+
 
