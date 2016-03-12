@@ -45,6 +45,7 @@ plot \
 #set format x "%d %H:%M"
 ##replot
 
+set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
 set autoscale x
 set autoscale y
 set xrange ["1457645500":]
