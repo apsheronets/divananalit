@@ -47,7 +47,7 @@ plot \
 
 set autoscale x
 set autoscale y
-set xrange ["1457745500":]
+set xrange ["1457645500":]
 set style fill solid 0.5
 set datafile missing "NaN"
 set output 'img/bsi2-all-time.png'
