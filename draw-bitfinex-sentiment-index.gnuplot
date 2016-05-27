@@ -61,6 +61,7 @@ plot \
 #  'data/bitfinex-sentiment-index.dat' using 1:3 with lines title 'Bitfinex sentiment index, red thing' linetype 1
 
 set y2label 'margin position value, USD'
+set y2tics
 set output 'img/bsi2-w-value-all-time.png'
 plot \
   'data/bsi2.dat' using 1:3 with lines axes x1y2 title 'margin position value, USD' linetype 3, \
