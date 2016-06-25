@@ -164,7 +164,9 @@ img/bitfinex-sentiment-index-all-time-wide.png: \
   data/detailed-bitfinex-btc-usd.dat
 	./draw-bitfinex-sentiment-index.gnuplot
 
-img/bsi2-all-time.png: \
+img/bsi2-all-time.png \
+    img/bitfinex-margin-in-active-positions-absolute.png \
+    img/bsi2-w-value-all-time.png: \
   draw-bitfinex-sentiment-index.gnuplot \
   data/bsi2.dat \
   data/detailed-bitfinex-btc-usd.dat
