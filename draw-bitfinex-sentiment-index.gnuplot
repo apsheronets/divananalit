@@ -68,19 +68,14 @@ plot \
   'data/bsi2.dat' using 1:3 with lines axes x1y2 title 'margin position value, USD' linetype 3, \
   'data/bsi2.dat' using 1:2 with lines title 'BSI2, %' linetype 2
 
-unset logscale y2
-unset ylabel
-unset y2label
-unset y2tics
-set ylabel "USD"
-
 set output 'img/bitfinex-margin-in-active-positions-absolute.png'
 
 plot \
-  'data/margin-stats-usd.dat' using 1:5 with lines axes x1y1 title 'USD margin in active positions', \
-  'data/margin-stats-btc.dat' using 1:5 with lines axes x1y1 title 'BTC margin in active positions', \
-  'data/margin-stats-ltc.dat' using 1:5 with lines axes x1y1 title 'LTC margin in active positions', \
-  'data/margin-stats-eth.dat' using 1:5 with lines axes x1y1 title 'ETH margin in active positions'
+  'data/bsi2.dat' using 1:2 with lines title 'BSI2, %' linetype 2, \
+  'data/margin-stats-usd.dat' using 1:5 with lines title 'USD margin in active positions' axes x1y2 linetype 1, \
+  'data/margin-stats-btc.dat' using 1:5 with lines title 'BTC margin in active positions' axes x1y2 linetype 3, \
+  'data/margin-stats-ltc.dat' using 1:5 with lines title 'LTC margin in active positions' axes x1y2 linetype 4, \
+  'data/margin-stats-eth.dat' using 1:5 with lines title 'ETH margin in active positions' axes x1y2 linetype 5
 
 
 #set terminal pngcairo transparent enhanced font "Helvetica,10" size 900, 600
