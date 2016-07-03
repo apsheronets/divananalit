@@ -5,6 +5,10 @@ require 'json'
 require 'date'
 require 'pg'
 
+EXCHANGE = 'bitfinex'
+A_CURRENCY = 'BTC'
+B_CURRENCY = 'USD'
+
 json = JSON.parse($stdin.read)
 
 c = PG.connect( dbname: 'divananalit' )
@@ -14,10 +18,22 @@ c.exec( 'BEGIN' )
 
 c.exec( 'SET TIME ZONE UTC' )
 
-update = Time.now.utc.strftime("%Y-%m-%d %H:%M:%S");
-c.prepare( 'insert_orderbook_update', "INSERT INTO orderbook_updates (orderbook_id, created_at) VALUES ((SELECT id FROM orderbooks WHERE exchange = 'bitfinex' AND pair = 'btcusd' LIMIT 1), $1) RETURNING id;" )
+c.prepare 'insert_orderbook_update', %{
+  INSERT INTO orderbook_updates (orderbook_id, created_at)
+  VALUES (
+    (SELECT id FROM orderbooks WHERE exchange_id = (
+      SELECT id FROM exchanges WHERE name = '#{EXCHANGE}' LIMIT 1
+    ) AND pair_id = (
+      SELECT id FROM pairs WHERE a_currency_id = (
+        SELECT id FROM currencies WHERE code = '#{A_CURRENCY}' LIMIT 1
+      ) AND b_currency_id = (
+        SELECT id FROM currencies WHERE code = '#{B_CURRENCY}' LIMIT 1
+      )
+    ) LIMIT 1), now()
+  ) RETURNING id;
+}
 update_id = nil
-c.exec_prepared( 'insert_orderbook_update', [update] ) do |result|
+c.exec_prepared( 'insert_orderbook_update' ) do |result|
   update_id = result.first['id']
 end
 
