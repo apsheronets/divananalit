@@ -40,7 +40,7 @@ page = Nokogiri::HTML(driver.page_source)
 
 driver.quit
 
-table = page.at('h5:contains("Rates on Margin Funding")').next.next.next.next
+table = page.at('h4:contains("Rates on Margin Funding")').next.next.next.next
 
 trs = table.search('tbody/tr')
 
