@@ -7,20 +7,19 @@ require 'pg'
 require 'httparty'
 
 EXCHANGE = 'bitfinex'
-A_CURRENCY = 'BTC'
-B_CURRENCY = 'USD'
+
+pairs = [
+  ['BTC', 'USD'],
+  ['LTC', 'USD'],
+  ['LTC', 'BTC'],
+  ['ETH', 'USD'],
+  ['ETH', 'BTC'],
+]
 
 c = PG.connect( dbname: 'divananalit' )
 c.set_error_verbosity PG::PQERRORS_VERBOSE
 
 c.exec 'SET TIME ZONE UTC'
-
-# I have to much of free time
-c.exec %{
-  INSERT INTO exchanges (name)
-  SELECT '#{EXCHANGE}'
-  WHERE NOT EXISTS (SELECT 1 FROM exchanges WHERE name = '#{EXCHANGE}')
-}
 
 c.prepare 'last_timestamp', %{
   SELECT extract (epoch from (timestamp)) AS timestamp
@@ -30,9 +29,9 @@ c.prepare 'last_timestamp', %{
       SELECT id FROM exchanges WHERE name = '#{EXCHANGE}' LIMIT 1
     ) AND pair_id = (
       SELECT id FROM pairs WHERE a_currency_id = (
-        SELECT id FROM currencies WHERE code = '#{A_CURRENCY}' LIMIT 1
+        SELECT id FROM currencies WHERE code = $1 LIMIT 1
       ) AND b_currency_id = (
-        SELECT id FROM currencies WHERE code = '#{B_CURRENCY}' LIMIT 1
+        SELECT id FROM currencies WHERE code = $2 LIMIT 1
       )
     ) LIMIT 1)
   ORDER BY trades.timestamp DESC
@@ -47,12 +46,12 @@ c.prepare 'check_if_trade_exist', %{
       SELECT id FROM exchanges WHERE name = '#{EXCHANGE}' LIMIT 1
     ) AND pair_id = (
       SELECT id FROM pairs WHERE a_currency_id = (
-        SELECT id FROM currencies WHERE code = '#{A_CURRENCY}' LIMIT 1
+        SELECT id FROM currencies WHERE code = $1 LIMIT 1
       ) AND b_currency_id = (
-        SELECT id FROM currencies WHERE code = '#{B_CURRENCY}' LIMIT 1
+        SELECT id FROM currencies WHERE code = $2 LIMIT 1
       )
     ) LIMIT 1)
-    AND tid = $1 LIMIT 1;
+    AND tid = $3 LIMIT 1;
 }
 
 c.prepare 'insert_trade', %{
@@ -68,44 +67,52 @@ c.prepare 'insert_trade', %{
       SELECT id FROM exchanges WHERE name = '#{EXCHANGE}' LIMIT 1
     ) AND pair_id = (
       SELECT id FROM pairs WHERE a_currency_id = (
-        SELECT id FROM currencies WHERE code = '#{A_CURRENCY}' LIMIT 1
+        SELECT id FROM currencies WHERE code = $1 LIMIT 1
       ) AND b_currency_id = (
-        SELECT id FROM currencies WHERE code = '#{B_CURRENCY}' LIMIT 1
+        SELECT id FROM currencies WHERE code = $2 LIMIT 1
       )
     ) LIMIT 1),
-    $1,
-    $2,
     $3,
-    to_timestamp($4),
-    $5
+    $4,
+    $5,
+    to_timestamp($6),
+    $7
   );
 }
 
 while true do
 
-  timestamp = nil
-  c.exec_prepared('last_timestamp') do |result|
-    unless result.first.nil?
-      timestamp = result.first['timestamp']
-    end
-  end
+  pairs.each do |pair|
 
-  response = HTTParty.get("https://api.bitfinex.com/v1/trades/btcusd", :query => {:timestamp => timestamp})
-  json = JSON.parse(response.body)
+    a_currency = pair[0]
+    b_currency = pair[1]
 
-  json.each do |trade|
-    c.exec_prepared( 'check_if_trade_exist', [trade['tid']] ) do |result|
-      if result.first.nil?
-        price = trade['price'].to_f
-        amount = trade['amount'].to_f
-        buy = (case trade['type'] when 'buy' then true when 'sell' then false else 'NULL' end)
-        timestamp = trade['timestamp'].to_i
-        tid = trade['tid'].to_i
-        c.exec_prepared( 'insert_trade', [price, amount, buy, timestamp, tid] )
+    timestamp = nil
+    c.exec_prepared('last_timestamp', [a_currency, b_currency]) do |result|
+      unless result.first.nil?
+        timestamp = result.first['timestamp']
       end
     end
-  end
 
-  sleep 10
+    pairstring = a_currency.downcase + b_currency.downcase
+    response = HTTParty.get("https://api.bitfinex.com/v1/trades/#{pairstring}", :query => {:timestamp => timestamp})
+    json = JSON.parse(response.body)
+
+    json.each do |trade|
+      c.exec_prepared( 'check_if_trade_exist', [a_currency, b_currency, trade['tid']] ) do |result|
+        if result.first.nil?
+          price = trade['price'].to_f
+          amount = trade['amount'].to_f
+          buy = (case trade['type'] when 'buy' then true when 'sell' then false else 'NULL' end)
+          timestamp = trade['timestamp'].to_i
+          tid = trade['tid'].to_i
+          c.exec_prepared( 'insert_trade', [a_currency, b_currency, price, amount, buy, timestamp, tid] )
+        end
+      end
+    end
+
+    sleep 10
+
+  end
 
 end

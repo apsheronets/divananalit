@@ -247,3 +247,93 @@ BEGIN;
   WHERE "timestamp" < now() - interval '3 months';*/
 
 COMMIT;
+
+
+BEGIN;
+
+  INSERT INTO exchanges (name) VALUES ('huobi');
+  INSERT INTO exchanges (name) VALUES ('btcchina');
+  INSERT INTO exchanges (name) VALUES ('lakebtc');
+  INSERT INTO exchanges (name) VALUES ('kraken');
+  INSERT INTO exchanges (name) VALUES ('itbit');
+  INSERT INTO exchanges (name) VALUES ('coinbase');
+  INSERT INTO exchanges (name) VALUES ('okcoin');
+
+  INSERT INTO currencies (code, name) VALUES ('LTC', 'Litecoin');
+  INSERT INTO currencies (code, name) VALUES ('ETH', 'Ethereum');
+  INSERT INTO currencies (code, name) VALUES ('DAO', 'The DAO');
+  INSERT INTO currencies (code, name) VALUES ('EUR', 'Euro');
+  INSERT INTO currencies (code, name)
+    SELECT 'RUR', 'Russian Ruble'
+    WHERE NOT EXISTS (SELECT 1 FROM currencies WHERE code = 'RUR');
+  INSERT INTO currencies (code, name)
+    SELECT 'CNY', 'Chinese Yuan Renminbi'
+    WHERE NOT EXISTS (SELECT 1 FROM currencies WHERE code = 'CNY');
+  INSERT INTO currencies (code, name) VALUES ('NMC', 'Namecoin');
+  INSERT INTO currencies (code, name) VALUES ('NVC', 'Novacoin');
+
+  INSERT INTO pairs (a_currency_id, b_currency_id)
+  VALUES (
+    (SELECT id FROM currencies WHERE code = 'LTC' LIMIT 1),
+    (SELECT id FROM currencies WHERE code = 'USD' LIMIT 1)
+  );
+  INSERT INTO pairs (a_currency_id, b_currency_id)
+  VALUES (
+    (SELECT id FROM currencies WHERE code = 'LTC' LIMIT 1),
+    (SELECT id FROM currencies WHERE code = 'BTC' LIMIT 1)
+  );
+  INSERT INTO pairs (a_currency_id, b_currency_id)
+  VALUES (
+    (SELECT id FROM currencies WHERE code = 'ETH' LIMIT 1),
+    (SELECT id FROM currencies WHERE code = 'USD' LIMIT 1)
+  );
+  INSERT INTO pairs (a_currency_id, b_currency_id)
+  VALUES (
+    (SELECT id FROM currencies WHERE code = 'ETH' LIMIT 1),
+    (SELECT id FROM currencies WHERE code = 'BTC' LIMIT 1)
+  );
+
+  INSERT INTO orderbooks (exchange_id, pair_id)
+  VALUES (
+    (SELECT id FROM exchanges WHERE name = 'bitfinex' LIMIT 1),
+    (SELECT id FROM pairs
+    WHERE a_currency_id = (
+      SELECT id FROM currencies WHERE code = 'LTC' LIMIT 1
+    ) AND b_currency_id = (
+      SELECT id FROM currencies WHERE code = 'USD' LIMIT 1
+    ) LIMIT 1)
+  );
+  INSERT INTO orderbooks (exchange_id, pair_id)
+  VALUES (
+    (SELECT id FROM exchanges WHERE name = 'bitfinex' LIMIT 1),
+    (SELECT id FROM pairs
+    WHERE a_currency_id = (
+      SELECT id FROM currencies WHERE code = 'LTC' LIMIT 1
+    ) AND b_currency_id = (
+      SELECT id FROM currencies WHERE code = 'BTC' LIMIT 1
+    ) LIMIT 1)
+  );
+
+  INSERT INTO orderbooks (exchange_id, pair_id)
+  VALUES (
+    (SELECT id FROM exchanges WHERE name = 'bitfinex' LIMIT 1),
+    (SELECT id FROM pairs
+    WHERE a_currency_id = (
+      SELECT id FROM currencies WHERE code = 'ETH' LIMIT 1
+    ) AND b_currency_id = (
+      SELECT id FROM currencies WHERE code = 'USD' LIMIT 1
+    ) LIMIT 1)
+  );
+
+  INSERT INTO orderbooks (exchange_id, pair_id)
+  VALUES (
+    (SELECT id FROM exchanges WHERE name = 'bitfinex' LIMIT 1),
+    (SELECT id FROM pairs
+    WHERE a_currency_id = (
+      SELECT id FROM currencies WHERE code = 'ETH' LIMIT 1
+    ) AND b_currency_id = (
+      SELECT id FROM currencies WHERE code = 'BTC' LIMIT 1
+    ) LIMIT 1)
+  );
+
+COMMIT;
