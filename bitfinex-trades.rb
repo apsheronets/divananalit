@@ -98,6 +98,7 @@ while true do
     response = HTTParty.get("https://api.bitfinex.com/v1/trades/#{pairstring}", :query => {:timestamp => timestamp})
     json = JSON.parse(response.body)
 
+    c.exec 'BEGIN;'
     json.each do |trade|
       c.exec_prepared( 'check_if_trade_exist', [a_currency, b_currency, trade['tid']] ) do |result|
         if result.first.nil?
@@ -110,6 +111,7 @@ while true do
         end
       end
     end
+    c.exec 'COMMIT;'
 
     sleep 10
 
