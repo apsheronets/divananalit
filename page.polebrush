@@ -58,6 +58,8 @@ h2. Bitfinex swap rates data (lendbook)
 
 You can see intercrossing between best ask and bid prices. "This happens because of different swap time ranges.":https://bitcointalk.org/index.php?topic=229438.msg7320978#msg7320978
 
+Since 2016.07.07 we don't count FRR in these charts.
+
 h3. Bitfinex lendbook for USD
 
 !/graphs/bitfinex-lendbook-usd-all-time.png(Bitfinex swap rates chart for USD - all time)!
