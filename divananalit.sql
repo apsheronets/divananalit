@@ -337,3 +337,89 @@ BEGIN;
   );
 
 COMMIT;
+
+
+BEGIN;
+
+  CREATE TABLE lendbooks (
+    id serial NOT NULL,
+    exchange_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    CONSTRAINT lendbooks_pkey PRIMARY KEY (id),
+    CONSTRAINT exchange_id_fk FOREIGN KEY (exchange_id)
+      REFERENCES exchanges (id) MATCH SIMPLE
+      ON DELETE RESTRICT,
+    CONSTRAINT currency_id_fk FOREIGN KEY (currency_id)
+      REFERENCES currencies (id) MATCH SIMPLE
+      ON DELETE RESTRICT
+  )
+  WITH (
+    OIDS=FALSE
+  );
+  CREATE UNIQUE INDEX index_unique_lendbooks_on_exchange_id_and_currency_id
+     ON lendbooks (exchange_id, currency_id);
+
+  CREATE TABLE lendbook_updates (
+    id bigserial NOT NULL,
+    lendbook_id integer NOT NULL,
+    created_at timestamp without time zone,
+    CONSTRAINT lendbook_updates_pkey PRIMARY KEY (id),
+    CONSTRAINT lendbook_id_fk FOREIGN KEY (lendbook_id)
+      REFERENCES lendbooks (id) MATCH SIMPLE
+      ON DELETE RESTRICT
+  )
+  WITH (
+    OIDS=FALSE
+  );
+  CREATE INDEX index_lendbook_updates_on_lendbook_id
+  ON lendbook_updates
+  USING btree
+  (lendbook_id);
+
+  CREATE TABLE lendbook_records (
+    id bigserial NOT NULL,
+    lendbook_update_id integer NOT NULL,
+    bid boolean NOT NULL,
+    frr boolean NOT NULL DEFAULT false,
+    timestamp timestamp without time zone NOT NULL,
+    rate numeric(16,8) NOT NULL,
+    amount numeric(16,8) NOT NULL,
+    period smallint NOT NULL,
+    CONSTRAINT lendbook_recordss_pkey PRIMARY KEY (id),
+    CONSTRAINT lendbook_update_id_fk FOREIGN KEY (lendbook_update_id)
+      REFERENCES lendbook_updates (id) MATCH SIMPLE
+      ON DELETE RESTRICT
+  )
+  WITH (
+    OIDS=FALSE
+  );
+  CREATE INDEX index_lendbook_records_on_lendbook_update_id
+  ON lendbook_records
+  USING btree
+  (lendbook_update_id);
+  CREATE INDEX index_lendbook_records_on_book_id_rate_for_bids
+  ON lendbook_records
+  USING btree
+  (lendbook_update_id, rate DESC)
+  WHERE bid = true;
+  CREATE INDEX index_lendbook_records_on_book_id_rate_for_asks
+  ON lendbook_records
+  USING btree
+  (lendbook_update_id, rate ASC)
+  WHERE bid = false;
+
+  INSERT INTO lendbooks (exchange_id, currency_id)
+  SELECT
+    (SELECT id FROM exchanges WHERE name = 'bitfinex' LIMIT 1),
+    currencies.id
+  FROM currencies
+  WHERE code IN ('BTC', 'USD', 'LTC', 'ETH');
+
+COMMIT;
+
+BEGIN;
+
+  INSERT INTO currencies (code, name) VALUES ('BFX', 'Bitfinex tokens');
+
+COMMIT;
+

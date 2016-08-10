@@ -14,6 +14,7 @@ pairs = [
   ['LTC', 'BTC'],
   ['ETH', 'USD'],
   ['ETH', 'BTC'],
+  ['BFX', 'USD'],
 ]
 
 c = PG.connect( dbname: 'divananalit' )
