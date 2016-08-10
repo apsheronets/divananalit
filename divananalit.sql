@@ -420,6 +420,21 @@ COMMIT;
 BEGIN;
 
   INSERT INTO currencies (code, name) VALUES ('BFX', 'Bitfinex tokens');
+  INSERT INTO pairs (a_currency_id, b_currency_id)
+  VALUES (
+    (SELECT id FROM currencies WHERE code = 'BFX' LIMIT 1),
+    (SELECT id FROM currencies WHERE code = 'USD' LIMIT 1)
+  );
+  INSERT INTO orderbooks (exchange_id, pair_id)
+  VALUES (
+    (SELECT id FROM exchanges WHERE name = 'bitfinex' LIMIT 1),
+    (SELECT id FROM pairs
+    WHERE a_currency_id = (
+      SELECT id FROM currencies WHERE code = 'BFX' LIMIT 1
+    ) AND b_currency_id = (
+      SELECT id FROM currencies WHERE code = 'USD' LIMIT 1
+    ) LIMIT 1)
+  );
 
 COMMIT;
 
